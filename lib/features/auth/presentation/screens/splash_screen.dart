@@ -1,3 +1,4 @@
+import 'package:craftybay/app/asset_path.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Expanded(
               child: Center(
-                child: SvgPicture.asset('assets/images/logo.svg', width: 120),
+                child: SvgPicture.asset(AssetPath.logoSvg, width: 120),
               ),
             ),
 
