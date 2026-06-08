@@ -12,6 +12,14 @@ class CraftyBayApp extends StatelessWidget {
       title: "Crafty Bay",
       initialRoute: SplashScreen.name,
       onGenerateRoute: AppRoutes.onGenerateRoute,
+
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationThemeData(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          )
+        )
+      ),
     );
   }
 }

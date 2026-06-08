@@ -25,6 +25,7 @@ dependencies:
   firebase_crashlytics: ^5.2.3
   firebase_analytics: ^12.4.2
   flutter_svg: ^2.3.0
+  carousel_slider: ^5.1.2
 
 dev_dependencies:
   flutter_test:
