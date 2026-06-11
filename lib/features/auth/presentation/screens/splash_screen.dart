@@ -1,8 +1,8 @@
+import 'package:craftybay/app/providers/theme_mode_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../app/asset_path.dart';
-import '../../../common/presentation/screen/main_bottom_nav_screen.dart';
+import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,20 +15,20 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    _moveToNextScreen();
+    // _moveToNextScreen();
     super.initState();
   }
 
-  Future<void> _moveToNextScreen() async {
-    await Future.delayed(Duration(seconds: 5));
-    if (mounted) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainBottomNavScreen.name,
-        (route) => false,
-      );
-    }
-  }
+  // Future<void> _moveToNextScreen() async {
+  //   await Future.delayed(Duration(seconds: 5));
+  //   if (mounted) {
+  //     Navigator.pushNamedAndRemoveUntil(
+  //       context,
+  //       MainBottomNavScreen.name,
+  //       (route) => false,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Center(
-                child: SvgPicture.asset(AssetPath.logoSvg, width: 120),
-              ),
-            ),
+            const Spacer(),
+            Center(child: AppLogo()),
 
-            CircularProgressIndicator(color: Colors.teal),
+            /// Dummy Theme Changer\
+            ThemeToggle(),
+
+            const Spacer(),
+            CircularProgressIndicator(),
             const SizedBox(height: 16),
             Text(
               'Version: 1.0',
@@ -53,6 +54,30 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ThemeToggle extends StatelessWidget {
+  const ThemeToggle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ThemeModeProvider>(
+      builder: (context, _themeModeProvider, _) {
+        return DropdownButton<ThemeMode>(
+
+          value: _themeModeProvider.themeMode,
+          items: [
+            DropdownMenuItem(value: ThemeMode.system, child: Text('System')),
+            DropdownMenuItem(value: ThemeMode.light, child: Text('Light')),
+            DropdownMenuItem(value: ThemeMode.dark, child: Text('Dark')),
+          ],
+          onChanged: (ThemeMode? newThemeMode) {
+            _themeModeProvider.changeThemeMode(newThemeMode!);
+          },
+        );
+      }
     );
   }
 }
