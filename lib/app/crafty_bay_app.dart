@@ -1,3 +1,4 @@
+import 'package:craftybay/app/providers/language_toggle_provider.dart';
 import 'package:craftybay/app/providers/theme_mode_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,38 +18,45 @@ class CraftyBayApp extends StatefulWidget {
 
 class _CraftyBayAppState extends State<CraftyBayApp> {
   final ThemeModeProvider _themeModeProvider = ThemeModeProvider();
+  final LanguageToggleProvider _languageToggleProvider =
+      LanguageToggleProvider();
 
   @override
   void initState() {
     _themeModeProvider.setDefaultThemeMode();
+    _languageToggleProvider.setDefaultLanguage();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: _themeModeProvider)],
-      child: Consumer<ThemeModeProvider>(
-        builder: (context, themeModeProvider, _) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: "Crafty Bay",
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: themeModeProvider.themeMode,
-            initialRoute: SplashScreen.name,
-            onGenerateRoute: AppRoutes.onGenerateRoute,
-            supportedLocales: [
-              Locale('en'),
-              Locale('bn'),
-            ],
-            localizationsDelegates: [
-              AppLocalizations.delegate, // Add this line
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            locale: Locale('bn'),
+      providers: [
+        ChangeNotifierProvider.value(value: _themeModeProvider),
+        ChangeNotifierProvider.value(value: _languageToggleProvider),
+      ],
+      child: Consumer<LanguageToggleProvider>(
+        builder: (context, languageProvider, child) {
+          return Consumer<ThemeModeProvider>(
+            builder: (context, themeModeProvider, _) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: "Crafty Bay",
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: themeModeProvider.themeMode,
+                initialRoute: SplashScreen.name,
+                onGenerateRoute: AppRoutes.onGenerateRoute,
+                supportedLocales: [Locale('en'), Locale('bn')],
+                localizationsDelegates: [
+                  AppLocalizations.delegate, // Add this line
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                locale: languageProvider.locale,
+              );
+            },
           );
         },
       ),

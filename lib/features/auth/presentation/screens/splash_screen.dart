@@ -2,7 +2,9 @@
 import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
+
 import '../../../shared/presentation/widgets/theme_toggle.dart';
+import '../../../shared/presentation/widgets/toggle_language.dart';
 import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,6 +45,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
             /// Dummy Theme Changer\
             ThemeToggle(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              const Text('Language: '),
+              LanguageToggle(),
+
+            ],),
 
             const Spacer(),
             CircularProgressIndicator(),
@@ -58,5 +67,9 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
+
+
+
 
 
