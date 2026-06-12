@@ -1,7 +1,7 @@
-import 'package:craftybay/app/providers/theme_mode_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import 'package:flutter/material.dart';
+
+import '../../../shared/presentation/widgets/theme_toggle.dart';
 import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -58,26 +58,4 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-class ThemeToggle extends StatelessWidget {
-  const ThemeToggle({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<ThemeModeProvider>(
-      builder: (context, themeModeProvider, _) {
-        return DropdownButton<ThemeMode>(
-
-          value: themeModeProvider.themeMode,
-          items: [
-            DropdownMenuItem(value: ThemeMode.system, child: Text('System')),
-            DropdownMenuItem(value: ThemeMode.light, child: Text('Light')),
-            DropdownMenuItem(value: ThemeMode.dark, child: Text('Dark')),
-          ],
-          onChanged: (ThemeMode? newThemeMode) {
-            themeModeProvider.changeThemeMode(newThemeMode!);
-          },
-        );
-      }
-    );
-  }
-}

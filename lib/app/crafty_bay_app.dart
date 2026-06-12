@@ -6,13 +6,26 @@ import '../features/auth/presentation/screens/splash_screen.dart';
 import 'app_theme.dart';
 import 'routes.dart';
 
-class CraftyBayApp extends StatelessWidget {
+class CraftyBayApp extends StatefulWidget {
   const CraftyBayApp({super.key});
+
+  @override
+  State<CraftyBayApp> createState() => _CraftyBayAppState();
+}
+
+class _CraftyBayAppState extends State<CraftyBayApp> {
+  final ThemeModeProvider _themeModeProvider = ThemeModeProvider();
+
+  @override
+  void initState() {
+    _themeModeProvider.setDefaultThemeMode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeModeProvider())],
+      providers: [ChangeNotifierProvider.value(value: _themeModeProvider)],
       child: Consumer<ThemeModeProvider>(
         builder: (context, themeModeProvider, _) {
           return MaterialApp(
@@ -24,7 +37,7 @@ class CraftyBayApp extends StatelessWidget {
             initialRoute: SplashScreen.name,
             onGenerateRoute: AppRoutes.onGenerateRoute,
           );
-        }
+        },
       ),
     );
   }
