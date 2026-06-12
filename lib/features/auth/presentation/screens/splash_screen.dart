@@ -1,4 +1,5 @@
 
+import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/presentation/widgets/theme_toggle.dart';
@@ -47,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
             CircularProgressIndicator(),
             const SizedBox(height: 16),
             Text(
-              'Version: 1.0',
+              '${AppLocalizations.of(context)!.version}: 1.0.0',
               style: TextStyle(color: Colors.grey.shade500, fontSize: 16),
             ),
             const SizedBox(height: 16),

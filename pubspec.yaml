@@ -18,7 +18,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
 # ======== Dependencies ======== #
   cupertino_icons: ^1.0.8
   firebase_core: ^4.10.0
@@ -28,6 +29,8 @@ dependencies:
   provider: ^6.1.5+1
   shared_preferences: ^2.5.5
   carousel_slider: ^5.1.2
+  intl: ^0.20.2
+  flutter_localization: ^0.4.0
 
 
 dev_dependencies:
@@ -46,10 +49,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+  generate: true
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

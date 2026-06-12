@@ -1,8 +1,10 @@
 import 'package:craftybay/app/providers/theme_mode_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/screens/splash_screen.dart';
+import '../l10n/app_localizations.dart';
 import 'app_theme.dart';
 import 'routes.dart';
 
@@ -36,6 +38,17 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
             themeMode: themeModeProvider.themeMode,
             initialRoute: SplashScreen.name,
             onGenerateRoute: AppRoutes.onGenerateRoute,
+            supportedLocales: [
+              Locale('en'),
+              Locale('bn'),
+            ],
+            localizationsDelegates: [
+              AppLocalizations.delegate, // Add this line
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: Locale('bn'),
           );
         },
       ),
