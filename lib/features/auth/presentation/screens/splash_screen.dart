@@ -64,17 +64,17 @@ class ThemeToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeModeProvider>(
-      builder: (context, _themeModeProvider, _) {
+      builder: (context, themeModeProvider, _) {
         return DropdownButton<ThemeMode>(
 
-          value: _themeModeProvider.themeMode,
+          value: themeModeProvider.themeMode,
           items: [
             DropdownMenuItem(value: ThemeMode.system, child: Text('System')),
             DropdownMenuItem(value: ThemeMode.light, child: Text('Light')),
             DropdownMenuItem(value: ThemeMode.dark, child: Text('Dark')),
           ],
           onChanged: (ThemeMode? newThemeMode) {
-            _themeModeProvider.changeThemeMode(newThemeMode!);
+            themeModeProvider.changeThemeMode(newThemeMode!);
           },
         );
       }

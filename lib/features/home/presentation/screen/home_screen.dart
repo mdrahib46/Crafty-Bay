@@ -53,16 +53,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 8),
             CarouselSlider(
-              options: CarouselOptions(
-                height: 180,
-                viewportFraction: 1,
-                enlargeCenterPage: true,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-              ),
+                options: CarouselOptions(
+                  height: 180,
+                  viewportFraction: 1,
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                ),
+
 
               items: _carouselItemList.map((i) {
                 return Container(
