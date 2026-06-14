@@ -24,7 +24,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
   @override
   void initState() {
     _themeModeProvider.setDefaultThemeMode();
-    _languageToggleProvider.setDefaultLanguage();
+    _languageToggleProvider.setDefaultLocale();
     super.initState();
   }
 
@@ -54,7 +54,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                locale: languageProvider.locale,
+                locale: languageProvider.currentLocal,
               );
             },
           );

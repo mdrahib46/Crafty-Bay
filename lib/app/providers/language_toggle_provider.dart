@@ -4,38 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageToggleProvider extends ChangeNotifier {
-  Locale _locale = const Locale('en');
+  Locale _currentLocale = const Locale('en');
 
-  Locale get locale => _locale;
+  final List<Locale> _locales = [Locale('en'), Locale('bn')];
+  List<Locale> get supportedLocales => _locales;
+
+  Locale get currentLocal => _currentLocale;
 
   void changeLocale(Locale locale) {
-    if (_locale == locale) return;
-    _locale = locale;
-    _saveLocalLanguage(locale);
+    if (_currentLocale == locale) return;
+    _currentLocale = locale;
+    _saveLocale(locale);
     notifyListeners();
   }
 
-  Future<void> _saveLocalLanguage(Locale lang) async {
+  Future<void> _saveLocale(Locale lang) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('locale', lang.languageCode);
   }
 
-  Future<void> setDefaultLanguage() async {
+  Future<void> setDefaultLocale() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String? language = sharedPreferences.getString('locale');
-    if (language != null) {
-      _locale = _parseLocalLanguage(language);
-    }
-  }
-
-  Locale _parseLocalLanguage(String lang) {
-    switch (lang) {
-      case 'bn':
-        return const Locale('bn');
-
-      case 'en':
-      default:
-        return const Locale('en');
+    String? locale = sharedPreferences.getString('locale');
+    if (locale != null) {
+      _currentLocale = Locale(locale);
     }
   }
 }

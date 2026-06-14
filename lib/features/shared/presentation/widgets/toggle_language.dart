@@ -12,7 +12,7 @@ class LanguageToggle extends StatelessWidget {
     final provider = context.watch<LanguageToggleProvider>();
 
     return DropdownButton<Locale>(
-      value: provider.locale,
+      value: provider.currentLocal,
       items: const [
         DropdownMenuItem(
           value: Locale('en'),

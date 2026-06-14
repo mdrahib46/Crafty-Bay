@@ -3,6 +3,7 @@ import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 
+import '../../../common/presentation/screen/main_bottom_nav_screen.dart';
 import '../../../shared/presentation/widgets/theme_toggle.dart';
 import '../../../shared/presentation/widgets/toggle_language.dart';
 import '../widgets/app_logo.dart';
@@ -18,20 +19,20 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // _moveToNextScreen();
+    _moveToNextScreen();
     super.initState();
   }
 
-  // Future<void> _moveToNextScreen() async {
-  //   await Future.delayed(Duration(seconds: 5));
-  //   if (mounted) {
-  //     Navigator.pushNamedAndRemoveUntil(
-  //       context,
-  //       MainBottomNavScreen.name,
-  //       (route) => false,
-  //     );
-  //   }
-  // }
+  Future<void> _moveToNextScreen() async {
+    await Future.delayed(Duration(seconds: 5));
+    if (mounted) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainBottomNavScreen.name,
+        (route) => false,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
