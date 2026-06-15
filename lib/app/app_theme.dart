@@ -9,8 +9,6 @@ class AppTheme {
 
   static ThemeData get darkTheme => _darkThemeData;
 
-
-
   /// Light Theme Configuration
   static final ThemeData _lightThemeData = ThemeData(
     colorSchemeSeed: AppColors.themeColor,
@@ -22,36 +20,40 @@ class AppTheme {
 
     textTheme: TextTheme(
       titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-      labelLarge: TextStyle(color: Colors.grey, fontWeight: FontWeight.w400)
+      labelLarge: TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
     ),
 
-    inputDecorationTheme: _inputDecorationTheme()
+    inputDecorationTheme: _inputDecorationTheme,
+
+    filledButtonTheme: _filledButtonThemeData,
   );
 
-
+  static final FilledButtonThemeData _filledButtonThemeData = FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        backgroundColor: AppColors.themeColor,
+        foregroundColor: Colors.white,
+        fixedSize: Size.fromWidth(double.maxFinite),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(8))
+      ),
+    );
 
 
   /// Input Decoration Theme
-  static InputDecorationTheme _inputDecorationTheme() {
-    return InputDecorationTheme(
-    contentPadding: .only(left: 12),
-    border: OutlineInputBorder(
-      borderSide: BorderSide( color: AppColors.themeColor,width: 2),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide( color: AppColors.themeColor,width: 2),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide( color: AppColors.themeColor,width: 2),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderSide: BorderSide( color: Colors.red, width: 2),
-    ),
-  );
-  }
-
-
-
+  static final InputDecorationTheme _inputDecorationTheme = InputDecorationTheme(
+      contentPadding: .only(left: 12),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.themeColor, width: 2),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.themeColor, width: 2),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.themeColor, width: 2),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red, width: 2),
+      ),
+    );
 
 
   /// Dark Theme Configuration
