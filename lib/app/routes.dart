@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/cart/presentation/screen/cart_screen.dart';
 import '../features/category/presentation/screen/category_screen.dart';
@@ -16,6 +17,9 @@ class AppRoutes {
         widget = SplashScreen();
         break;
 
+      case SignInScreen.name:
+        widget = SignInScreen();
+        break;
       case MainBottomNavScreen.name:
         widget = MainBottomNavScreen();
         break;
