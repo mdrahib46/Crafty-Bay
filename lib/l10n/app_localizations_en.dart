@@ -12,6 +12,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get version => 'Version';
 
   @override
+  String get firstName => 'First Name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get mobile => 'Mobile';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get shippingAddress => 'Shipping Address';
+
+  @override
   String get email => 'Email';
 
   @override

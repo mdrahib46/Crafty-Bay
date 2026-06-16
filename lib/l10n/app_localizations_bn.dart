@@ -12,6 +12,21 @@ class AppLocalizationsBn extends AppLocalizations {
   String get version => 'সংস্করণ';
 
   @override
+  String get firstName => 'নাম';
+
+  @override
+  String get lastName => 'পদবি';
+
+  @override
+  String get mobile => 'মোবাইল নম্বর';
+
+  @override
+  String get city => 'শহর';
+
+  @override
+  String get shippingAddress => 'ডেলিভারির ঠিকানা';
+
+  @override
   String get email => 'ইমেইল';
 
   @override

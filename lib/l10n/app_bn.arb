@@ -1,5 +1,10 @@
 {
   "version": "সংস্করণ",
+  "firstName": "নাম",
+  "lastName": "পদবি",
+  "mobile": "মোবাইল নম্বর",
+  "city": "শহর",
+  "shippingAddress": "ডেলিভারির ঠিকানা",
   "email": "ইমেইল",
   "password": "পাসওয়ার্ড"
 }

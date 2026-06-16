@@ -40,7 +40,10 @@ class AppTheme {
 
   /// Input Decoration Theme
   static final InputDecorationTheme _inputDecorationTheme = InputDecorationTheme(
-      contentPadding: .only(left: 12),
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 14,
+    ),
       border: OutlineInputBorder(
         borderSide: BorderSide(color: AppColors.themeColor, width: 2),
       ),

@@ -1,4 +1,5 @@
 
+import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
                         children: [
                           TextSpan(
-                            text: 'Sign In',
+                            text: 'Sign Up',
                             style: Theme.of(context).textTheme.bodyMedium!
                                 .copyWith(
                                   color: AppColors.themeColor,
@@ -117,7 +118,9 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  void _navigateToSignUpScreen() {}
+  void _navigateToSignUpScreen() {
+    Navigator.pushNamed(context, SignUpScreen.name);
+  }
 
   @override
   void dispose() {

@@ -4,7 +4,7 @@ class Validators {
   Validators._();
 
   static String? validateInput(String? input, String message) {
-    if (input != null) {
+    if (input != null || input!.trim().isEmpty) {
       return message;
     }
     return null;
@@ -13,6 +13,18 @@ class Validators {
   static String? validateEmail(String? input) {
     if (EmailValidator.validate(input ?? '') == false) {
       return 'Enter a valid email address';
+    }
+    return null;
+  }
+
+  static String? validateMobile(String? input) {
+    final bdPhoneRegex = RegExp(r'^(?:(?:\+|00)88|01)?\d{11}$');
+    if (input == null || input.trim().isEmpty) {
+      return 'Enter a your mobile number';
+    }
+
+    if (!bdPhoneRegex.hasMatch(input)) {
+      return "Enter a valid mobile number";
     }
     return null;
   }

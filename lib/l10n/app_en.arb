@@ -1,5 +1,10 @@
 {
     "version": "Version",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "mobile": "Mobile",
+    "city": "City",
+    "shippingAddress": "Shipping Address",
     "email": "Email",
     "password": "Password"
 }
