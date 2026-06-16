@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/auth/presentation/screens/otp_verify_screen.dart';
 import '../features/auth/presentation/screens/sign_in_screen.dart';
 import '../features/auth/presentation/screens/sign_up_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
@@ -19,6 +20,9 @@ class AppRoutes {
         break;
       case SignUpScreen.name:
         widget = SignUpScreen();
+        break;
+      case OtpVerifyScreen.name:
+        widget = OtpVerifyScreen();
         break;
 
       case SignInScreen.name:

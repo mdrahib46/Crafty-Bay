@@ -1,4 +1,3 @@
-
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +67,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       decoration: InputDecoration(
                         hintText: context.localization.password,
                       ),
-                      validator: (String? input) => Validators.validatePassword(input),
+                      validator: (String? input) =>
+                          Validators.validatePassword(input),
                     ),
                     const SizedBox(height: 20),
 
@@ -97,7 +97,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                     ),
-                    TextButton(onPressed: (){}, child: const Text('Forgot Password'))
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Forgot Password'),
+                    ),
                   ],
                 ),
               ),

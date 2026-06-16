@@ -1,3 +1,4 @@
+import 'package:craftybay/features/auth/presentation/screens/otp_verify_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -142,9 +143,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _onTapSingUp() {
-    if (_formKey.currentState!.validate()) {
+    // if (_formKey.currentState!.validate()) {
+      Navigator.pushNamed(context, OtpVerifyScreen.name);
 
-    }
+    // }
   }
 
   void _navigateToSignInScreen() {}

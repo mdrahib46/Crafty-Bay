@@ -26,6 +26,14 @@ class AppTheme {
     inputDecorationTheme: _inputDecorationTheme,
 
     filledButtonTheme: _filledButtonThemeData,
+
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(
+          AppColors.themeColor,
+        ),
+      ),
+    ),
   );
 
   static final FilledButtonThemeData _filledButtonThemeData = FilledButtonThemeData(
