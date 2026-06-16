@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 
 class Validators {
+  Validators._();
+
   static String? validateInput(String? input, String message) {
     if (input != null) {
       return message;
