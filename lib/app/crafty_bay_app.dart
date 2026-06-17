@@ -1,13 +1,14 @@
-import 'package:craftybay/app/providers/language_toggle_provider.dart';
-import 'package:craftybay/app/providers/theme_mode_provider.dart';
-import 'package:craftybay/features/common/presentation/screen/providers/main_nav_holder_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/screens/splash_screen.dart';
+import '../features/common/presentation/screen/providers/main_nav_holder_provider.dart';
 import '../l10n/app_localizations.dart';
 import 'app_theme.dart';
+import 'providers/language_toggle_provider.dart';
+import 'providers/theme_mode_provider.dart';
 import 'routes.dart';
 
 class CraftyBayApp extends StatefulWidget {
