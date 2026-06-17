@@ -1,11 +1,11 @@
-import 'package:craftybay/features/auth/presentation/screens/otp_verify_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/extensions/localization_extension.dart';
-import '../../../shared/presentation/utils/validators.dart';
+import '../../../shared/utils/validators.dart';
 import '../widgets/app_logo.dart';
+import 'otp_verify_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

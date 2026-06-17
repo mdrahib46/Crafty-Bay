@@ -1,4 +1,7 @@
+import 'package:craftybay/app/app_colors.dart';
+import 'package:craftybay/features/common/presentation/screen/providers/main_nav_holder_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../cart/presentation/screen/cart_screen.dart';
 import '../../../category/presentation/screen/category_screen.dart';
@@ -15,7 +18,7 @@ class MainBottomNavScreen extends StatefulWidget {
 }
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
-  int _selectedIndex = 0;
+  final MainNavHolderProvider _mainNavHolderProvider = MainNavHolderProvider();
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -27,33 +30,38 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     print("Main Bottom Screen");
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (int value) {
-          setState(() {
-            _selectedIndex = value;
-          });
+    return ChangeNotifierProvider.value(
+      value: _mainNavHolderProvider,
+      child: Consumer<MainNavHolderProvider>(
+        builder: (context, _, _) {
+          return Scaffold(
+            body: _screens[_mainNavHolderProvider.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              unselectedItemColor: Colors.grey,
+              selectedItemColor: AppColors.themeColor,
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
+              currentIndex: _mainNavHolderProvider.currentIndex,
+              onTap: _mainNavHolderProvider.changeIndex,
+
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.category),
+                  label: 'Category',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_basket_outlined),
+                  label: 'Cart',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_border),
+                  label: 'Wish',
+                ),
+              ],
+            ),
+          );
         },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.category),
-            label: 'Category',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_border),
-            label: 'Wish',
-          ),
-        ],
       ),
     );
   }

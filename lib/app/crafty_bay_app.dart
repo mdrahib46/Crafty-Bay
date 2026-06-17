@@ -1,5 +1,6 @@
 import 'package:craftybay/app/providers/language_toggle_provider.dart';
 import 'package:craftybay/app/providers/theme_mode_provider.dart';
+import 'package:craftybay/features/common/presentation/screen/providers/main_nav_holder_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
       providers: [
         ChangeNotifierProvider.value(value: _themeModeProvider),
         ChangeNotifierProvider.value(value: _languageToggleProvider),
+        ChangeNotifierProvider(create: (_)=> MainNavHolderProvider()),
       ],
       child: Consumer<LanguageToggleProvider>(
         builder: (context, languageProvider, child) {

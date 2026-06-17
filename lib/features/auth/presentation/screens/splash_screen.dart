@@ -3,8 +3,9 @@ import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart
 import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-import '../../../shared/presentation/widgets/theme_toggle.dart';
-import '../../../shared/presentation/widgets/toggle_language.dart';
+
+import '../../../shared/widgets/theme_toggle.dart';
+import '../../../shared/widgets/toggle_language.dart';
 import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
