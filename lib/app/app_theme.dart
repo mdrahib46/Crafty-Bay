@@ -34,6 +34,8 @@ class AppTheme {
         ),
       ),
     ),
+
+    appBarTheme: AppBarTheme(backgroundColor: Colors.white,)
   );
 
   static final FilledButtonThemeData _filledButtonThemeData = FilledButtonThemeData(

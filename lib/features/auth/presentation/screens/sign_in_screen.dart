@@ -112,13 +112,13 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onTapSingIn() {
-    if (_formKey.currentState!.validate()) {
+    // if (_formKey.currentState!.validate()) {
       Navigator.pushNamedAndRemoveUntil(
         context,
         MainBottomNavScreen.name,
         (route) => false,
       );
-    }
+    // }
   }
 
   void _navigateToSignUpScreen() {
