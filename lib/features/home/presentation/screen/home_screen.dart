@@ -1,12 +1,10 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:craftybay/features/home/widgets/product_search_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../widgets/home_appbar.dart';
 import '../../widgets/home_section_header.dart';
-
+import '../../widgets/product_search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List _carouselItemList = [1, 2, 3, 4, 5, 6];
-  int _currentIndex = 0;
+  ValueNotifier<int> _currentIndex = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ProductSearchBar(),
             const SizedBox(height: 8),
             CarouselSlider(
-                options: CarouselOptions(
-                  height: 180,
-                  viewportFraction: 1,
-                  enlargeCenterPage: true,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                ),
-
+              options: CarouselOptions(
+                height: 180,
+                viewportFraction: 1,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex.value = index;
+                  });
+                },
+              ),
 
               items: _carouselItemList.map((i) {
                 return Container(
-                  width: double.infinity,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.themeColor,
@@ -61,26 +58,46 @@ class _HomeScreenState extends State<HomeScreen> {
               }).toList(),
             ),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(_carouselItemList.length, (int index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  height: 16,
-                  width: 16,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _currentIndex == index
-                        ? AppColors.themeColor
-                        : Colors.white,
-                    border: BoxBorder.all(
-                      color: _currentIndex == index
-                          ? AppColors.themeColor
-                          : Colors.grey,
-                    ),
-                  ),
+            ValueListenableBuilder(
+              valueListenable: _currentIndex,
+              builder: (context, index, _) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < _carouselItemList.length; i++)
+                      Container(
+                        height: 12,
+                        width: 12,
+                        margin: EdgeInsets.only(right: 8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: i == index
+                              ? AppColors.themeColor
+                              : Colors.grey.shade300,
+                        ),
+                      ),
+                  ],
+                  // List.generate(_carouselItemList.length, (int index) {
+                  //
+                  //   return Container(
+                  //     margin: const EdgeInsets.symmetric(horizontal: 4),
+                  //     height: 10,
+                  //     width: 10,
+                  //     decoration: BoxDecoration(
+                  //       shape: BoxShape.circle,
+                  //       color: _currentIndex == index
+                  //           ? AppColors.themeColor
+                  //           : Colors.white,
+                  //       border: BoxBorder.all(
+                  //         color: _currentIndex == index
+                  //             ? AppColors.themeColor
+                  //             : Colors.grey,
+                  //       ),
+                  //     ),
+                  //   );
+                  // }),
                 );
-              }),
+              },
             ),
             const SizedBox(height: 16),
             HomeSectionHeader(title: 'All Categories', onTap: () {}),
@@ -89,5 +106,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }
