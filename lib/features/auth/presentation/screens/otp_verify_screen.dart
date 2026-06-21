@@ -1,10 +1,11 @@
-import 'package:craftybay/features/auth/presentation/provider/otp_timer_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../common/presentation/screen/main_bottom_nav_screen.dart';
+import '../provider/otp_timer_provider.dart';
 import '../widgets/app_logo.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
