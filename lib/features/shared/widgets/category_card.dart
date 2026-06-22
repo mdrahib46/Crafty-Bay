@@ -10,7 +10,7 @@ class CategoryCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: .all(16),
+          padding: .all(12),
           decoration: BoxDecoration(
             color: AppColors.themeColor.withAlpha(20),
             borderRadius: .circular(8),

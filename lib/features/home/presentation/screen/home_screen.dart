@@ -31,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
             HomeSectionHeader(title: 'All Categories', onTap: () {}),
             const SizedBox(height: 8),
             HomeCategorySection(),
+            const SizedBox(height: 8),
+            HomeSectionHeader(title: 'Popular', onTap: () {}),
+            const SizedBox(height: 8),
+
           ],
         ),
       ),
