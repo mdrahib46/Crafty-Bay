@@ -1,3 +1,4 @@
+import 'package:craftybay/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/home_appbar.dart';
@@ -35,6 +36,34 @@ class _HomeScreenState extends State<HomeScreen> {
             HomeSectionHeader(title: 'Popular', onTap: () {}),
             const SizedBox(height: 8),
 
+            Container(
+              width: 150,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              child: Column(
+                children: [
+                  Container(
+                    width: 150,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: AppColors.themeColor.withAlpha(20),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
+                    ),
+                    child: Image.asset('assets/images/shoe.png'),
+                  ),
+                  Text('Title of the Product '),
+                  Row(
+                    children: [
+                      Text('\$ 100'),
+                      Wrap(children: [Icon(Icons.star), Text('4.5')]),
+                      Container(child: Icon(Icons.favorite_border)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
