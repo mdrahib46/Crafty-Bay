@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/extensions/localization_extension.dart';
-import '../../../common/presentation/screen/main_bottom_nav_screen.dart';
+import '../../../shared/presentation/main_bottom_nav_screen.dart';
 import '../../../shared/utils/validators.dart';
 import '../widgets/app_logo.dart';
 
