@@ -48,6 +48,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
                 ),
               ),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: 'Special', onTap: () {
+              }),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
+                ),
+              ),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: 'New', onTap: () {
+              }),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
+                ),
+              ),
             ],
           ),
         ),
