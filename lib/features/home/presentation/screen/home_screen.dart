@@ -48,8 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
                 ),
               ),
-
-              // ProductCard(),
             ],
           ),
         ),
