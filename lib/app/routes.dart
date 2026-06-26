@@ -6,6 +6,7 @@ import '../features/auth/presentation/screens/sign_up_screen.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/cart/presentation/screen/cart_screen.dart';
 import '../features/category/presentation/screen/category_screen.dart';
+import '../features/product/presentation/screen/product_details_screen.dart';
 import '../features/shared/presentation/main_bottom_nav_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/wish_list/presentation/screen/wish_list_screen.dart';
@@ -33,6 +34,9 @@ class AppRoutes {
         break;
       case HomeScreen.name:
         widget = HomeScreen();
+        break;
+      case ProductDetailsScreen.name:
+        widget = ProductDetailsScreen();
         break;
       case CategoryScreen.name:
         widget = CategoryScreen();

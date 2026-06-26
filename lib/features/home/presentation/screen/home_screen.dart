@@ -32,42 +32,60 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               HomeCarouselSlider(),
               const SizedBox(height: 16),
-              HomeSectionHeader(title: 'All Categories', onTap: () {
-                context.read<MainNavHolderProvider>().navigateToCategory();
-              }),
+              HomeSectionHeader(
+                title: 'All Categories',
+                onTap: () {
+                  context.read<MainNavHolderProvider>().navigateToCategory();
+                },
+              ),
               const SizedBox(height: 8),
               HomeCategorySection(),
               const SizedBox(height: 8),
-              HomeSectionHeader(title: 'Popular', onTap: () {
-              }),
+              HomeSectionHeader(title: 'Popular', onTap: () {}),
               const SizedBox(height: 8),
               SingleChildScrollView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map((e) => ProductCard()).toList(),
                 ),
               ),
               const SizedBox(height: 8),
-              HomeSectionHeader(title: 'Special', onTap: () {
-              }),
+              HomeSectionHeader(title: 'Special', onTap: () {}),
               const SizedBox(height: 8),
               SingleChildScrollView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map((e) => ProductCard()).toList(),
                 ),
               ),
               const SizedBox(height: 8),
-              HomeSectionHeader(title: 'New', onTap: () {
-              }),
+              HomeSectionHeader(title: 'New', onTap: () {}),
               const SizedBox(height: 8),
               SingleChildScrollView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: [1, 2, 3, 4, 5].map((e) => ProductCard()).toList(),
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map((e) => ProductCard()).toList(),
                 ),
               ),
             ],
