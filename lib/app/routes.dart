@@ -39,6 +39,7 @@ class AppRoutes {
         widget = ProductDetailsScreen();
         break;
       case CategoryScreen.name:
+
         widget = CategoryScreen();
         break;
       case CartScreen.name:

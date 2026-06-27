@@ -5,13 +5,16 @@ import 'package:provider/provider.dart';
 import '../../../shared/providers/main_nav_holder_provider.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+  const CategoryScreen({super.key, required this.categoryId, required this.categoryName});
 
   static const String name = '/category-screen';
+  final String categoryId, categoryName;
+
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
+
 
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
