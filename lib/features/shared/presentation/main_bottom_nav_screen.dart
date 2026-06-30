@@ -23,7 +23,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    CategoryScreen(categoryId: '', categoryName: '',),
+    CategoryScreen(),
     CartScreen(),
     WishListScreen(),
   ];

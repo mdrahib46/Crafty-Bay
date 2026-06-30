@@ -1,3 +1,4 @@
+import 'package:craftybay/features/product/presentation/screen/product_list_by_category_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/otp_verify_screen.dart';
@@ -39,7 +40,6 @@ class AppRoutes {
         widget = ProductDetailsScreen();
         break;
       case CategoryScreen.name:
-
         widget = CategoryScreen();
         break;
       case CartScreen.name:
@@ -48,6 +48,12 @@ class AppRoutes {
       case WishListScreen.name:
         widget = WishListScreen();
         break;
+      case ProductListByCategoryScreen.name:
+        Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        widget = ProductListByCategoryScreen(
+          categoryId: args['categoryId'],
+          categoryName: args['categoryName'],
+        );
     }
     return MaterialPageRoute(builder: (ctx) => widget);
   }
