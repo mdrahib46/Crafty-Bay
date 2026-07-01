@@ -1,7 +1,6 @@
 import 'package:craftybay/features/shared/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../../shared/widgets/category_card.dart';
 
 class ProductListByCategoryScreen extends StatefulWidget {
   const ProductListByCategoryScreen({
@@ -31,7 +30,7 @@ class _ProductListByCategoryScreenState
           crossAxisCount: 3,
           mainAxisSpacing: 8,
           crossAxisSpacing: 4,
-          childAspectRatio: 0.9,
+          childAspectRatio: 0.7,
         ),
         itemBuilder: (context, index) {
           return FittedBox(child: ProductCard());
