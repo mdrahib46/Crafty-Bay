@@ -1,14 +1,17 @@
-import 'package:craftybay/features/product/presentation/widgets/selectable_chip_button.dart';
-import 'package:craftybay/features/shared/widgets/inc_dec_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
-import '../../../cart/presentation/widgets/total_price_and_checkout_section.dart';
+import '../../../shared/widgets/inc_dec_button.dart';
+import '../widgets/color_picker.dart';
+import '../widgets/price_and_cart_section.dart';
 import '../widgets/product_image_banner.dart';
+import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.productId});
   static const String name = '/Product-Details';
+
+  final String productId;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -17,16 +20,8 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final List _carouselItemList = [1, 2, 3, 4, 5, 6];
   final ValueNotifier<int> _currentIndex = ValueNotifier(0);
-  final List<Color> _itemColor = [
-    Colors.green,
-    Colors.blue,
-    Colors.purpleAccent,
-    Colors.redAccent,
-    Colors.yellow,
-  ];
+  final List<String> _itemColor = ['Red', 'Blue', 'Black', 'Yellow', 'White'];
   final List<String> _itemSize = ['S', 'M', 'L', 'XL', '2L'];
-  final ValueNotifier<int> _selectedColor = ValueNotifier(0);
-  final ValueNotifier<int> _selectedSize = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +73,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           children: [
                             Wrap(
                               spacing: 4,
-                              crossAxisAlignment: WrapCrossAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.start,
                               children: [
-                                const Icon(Icons.star, color: Colors.amber, size: 20),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 20,
+                                ),
                                 Text('4.5', style: textTheme.bodyLarge),
                               ],
                             ),
@@ -109,29 +108,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        Text('Colors', style: textTheme.titleMedium),
+                        _buildSectionHeader('Colors'),
                         const SizedBox(height: 8),
-                        ValueListenableBuilder<int>(
-                          valueListenable: _selectedColor,
-                          builder: (context, selectedIndex, _) {
-                            return SelectableButton<Color>(
-                              items: _itemColor,
-                              selectedIndex: selectedIndex,
-                              onSelected: (index) => _selectedColor.value = index,
-                            );
+                        ColorPicker(
+                          colors: _itemColor,
+                          onChange: (String selectedColor) {
+                            print(selectedColor);
                           },
                         ),
                         const SizedBox(height: 16),
-                        Text('Size', style: textTheme.titleMedium),
+                        _buildSectionHeader('Size'),
                         const SizedBox(height: 8),
-                        ValueListenableBuilder<int>(
-                          valueListenable: _selectedSize,
-                          builder: (context, selectedIndex, _) {
-                            return SelectableButton<String>(
-                              items: _itemSize,
-                              selectedIndex: selectedIndex,
-                              onSelected: (index) => _selectedSize.value = index,
-                            );
+                        SizePicker(
+                          itemSize: _itemSize,
+                          onChange: (String selectedSize) {
+                            print(selectedSize);
                           },
                         ),
                         const SizedBox(height: 16),
@@ -139,21 +130,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         const SizedBox(height: 8),
                         Text(
                           'This is a high-quality product perfect for the New Year season. Enjoy exclusive discounts and premium features. Lightweight, durable, and stylish.',
-                          style: textTheme.bodyMedium?.copyWith(
-                            color: Colors.grey.shade600,
-                          ),
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black54)
                         ),
                         const SizedBox(height: 24),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 16,),
                 ],
               ),
             ),
           ),
+          PriceAndAddToCartSection(),
 
-          TotalPriceAndCheckoutSection(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: Colors.grey.shade700,
       ),
     );
   }

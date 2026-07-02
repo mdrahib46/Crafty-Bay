@@ -1,4 +1,4 @@
-import 'package:craftybay/features/product/presentation/screen/product_list_by_category_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/otp_verify_screen.dart';
@@ -8,6 +8,7 @@ import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/cart/presentation/screen/cart_screen.dart';
 import '../features/category/presentation/screen/category_screen.dart';
 import '../features/product/presentation/screen/product_details_screen.dart';
+import '../features/product/presentation/screen/product_list_by_category_screen.dart';
 import '../features/shared/presentation/main_bottom_nav_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/wish_list/presentation/screen/wish_list_screen.dart';
@@ -37,7 +38,8 @@ class AppRoutes {
         widget = HomeScreen();
         break;
       case ProductDetailsScreen.name:
-        widget = ProductDetailsScreen();
+        String  args = settings.arguments as String;
+        widget = ProductDetailsScreen(productId: args);
         break;
       case CategoryScreen.name:
         widget = CategoryScreen();

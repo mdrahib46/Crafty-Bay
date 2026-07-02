@@ -16,7 +16,7 @@ class ProductCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, ProductDetailsScreen.name);
+        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: 'productId');
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
