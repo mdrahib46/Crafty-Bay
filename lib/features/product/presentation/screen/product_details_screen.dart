@@ -1,3 +1,4 @@
+import 'package:craftybay/features/product/presentation/screen/product_review_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
@@ -84,7 +85,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ],
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, ProductReviewScreen.name);
+                              },
                               child: const Text(
                                 'Review',
                                 style: TextStyle(

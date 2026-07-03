@@ -1,4 +1,5 @@
-
+import 'package:craftybay/features/product/presentation/screen/create_review_screen.dart';
+import 'package:craftybay/features/product/presentation/screen/product_review_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/otp_verify_screen.dart';
@@ -38,7 +39,7 @@ class AppRoutes {
         widget = HomeScreen();
         break;
       case ProductDetailsScreen.name:
-        String  args = settings.arguments as String;
+        String args = settings.arguments as String;
         widget = ProductDetailsScreen(productId: args);
         break;
       case CategoryScreen.name:
@@ -56,6 +57,15 @@ class AppRoutes {
           categoryId: args['categoryId'],
           categoryName: args['categoryName'],
         );
+        break;
+
+      case ProductReviewScreen.name:
+        widget = ProductReviewScreen();
+        break;
+
+      case CreateReviewScreen.name:
+        widget = CreateReviewScreen();
+        break;
     }
     return MaterialPageRoute(builder: (ctx) => widget);
   }

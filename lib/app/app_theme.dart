@@ -29,45 +29,53 @@ class AppTheme {
 
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: WidgetStatePropertyAll(
-          AppColors.themeColor,
-        ),
+        foregroundColor: WidgetStatePropertyAll(AppColors.themeColor),
       ),
     ),
 
-    appBarTheme: AppBarTheme(backgroundColor: Colors.white,)
+    appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(100),
+      ),
+      backgroundColor: AppColors.themeColor,
+      foregroundColor: Colors.white,
+    ),
   );
 
-  static final FilledButtonThemeData _filledButtonThemeData = FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        backgroundColor: AppColors.themeColor,
-        foregroundColor: Colors.white,
-        fixedSize: Size.fromWidth(double.maxFinite),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(8))
-      ),
-    );
-
+  static final FilledButtonThemeData _filledButtonThemeData =
+      FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.themeColor,
+          foregroundColor: Colors.white,
+          fixedSize: Size.fromWidth(double.maxFinite),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(8),
+          ),
+        ),
+      );
 
   /// Input Decoration Theme
-  static final InputDecorationTheme _inputDecorationTheme = InputDecorationTheme(
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 14,
-    ),
-      border: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.themeColor, width: 2),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.themeColor, width: 2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.themeColor, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red, width: 2),
-      ),
-    );
-
+  static final InputDecorationTheme _inputDecorationTheme =
+      InputDecorationTheme(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.themeColor, width: 2),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.themeColor, width: 2),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.themeColor, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red, width: 2),
+        ),
+      );
 
   /// Dark Theme Configuration
   static final ThemeData _darkThemeData = ThemeData(
