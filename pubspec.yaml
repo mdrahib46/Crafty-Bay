@@ -33,6 +33,8 @@ dependencies:
   flutter_localization: ^0.4.0
   email_validator: ^3.0.0
   pin_code_fields: ^9.4.0
+  http: ^1.6.0
+  logger: ^2.7.0
 
 
 dev_dependencies:
