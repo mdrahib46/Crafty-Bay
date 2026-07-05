@@ -1,3 +1,6 @@
+part of 'network_caller.dart';
+
+
 class NetworkResponse {
   final bool isSuccess;
   final int statusCode;

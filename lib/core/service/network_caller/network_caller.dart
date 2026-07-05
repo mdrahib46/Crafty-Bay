@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'network_response.dart';
 import 'package:logger/logger.dart';
+
+part 'network_response.dart';
 
 class NetworkCaller {
   final Logger _logger = Logger();
-  final Map<String, String> headers;
+  final Map<String, String> Function() headers;
 
   /// Constructor
   NetworkCaller({required this.headers});
@@ -16,7 +17,7 @@ class NetworkCaller {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(url, headers: headers);
+      _logRequest(url, headers: headers());
 
       final Response response = await get(uri);
 
@@ -51,16 +52,15 @@ class NetworkCaller {
   /// Post Request
   Future<NetworkResponse> postRequest(
     String url, {
-    Map<String, String>? headers,
     Map<String, dynamic>? body,
   }) async {
     try {
       Uri uri = Uri.parse(url);
-      _logRequest(url, headers: headers, requestBody: body);
+      _logRequest(url, requestBody: body, headers: headers());
 
       final Response response = await post(
         uri,
-        headers: headers,
+        headers: headers(),
         body: jsonEncode(body),
       );
       _logResponse(response);
