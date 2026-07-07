@@ -1,10 +1,28 @@
 {
-    "version": "Version",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "mobile": "Mobile",
-    "city": "City",
-    "shippingAddress": "Shipping Address",
-    "email": "Email",
-    "password": "Password"
+  "version": "Version",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "mobile": "Mobile",
+  "city": "City",
+  "shippingAddress": "Shipping Address",
+  "email": "Email",
+  "password": "Password",
+
+  "createAnAccount": "Create An Account",
+  "signUpWithEmailPassword": "Sign up with your email and password",
+  "signUp": "Sign Up",
+  "alreadyHaveAnAccount": "Already have an account? ",
+  "signIn": "Sign In",
+
+  "enterEmail": "Enter your email!",
+  "enterFirstName": "Enter your first name!",
+  "enterLastName": "Enter your last name!",
+  "enterCity": "Enter your city!",
+
+  "verifyYourOtp": "Verify Your OTP",
+  "otpSentToEmail": "A 4 digit OTP has been sent to your email address",
+  "verify": "Verify",
+  "resendOtp": "Resend OTP",
+  "otpExpireMessage": "This code will expire in "
+
 }

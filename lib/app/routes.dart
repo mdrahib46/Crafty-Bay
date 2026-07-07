@@ -26,7 +26,8 @@ class AppRoutes {
         widget = SignUpScreen();
         break;
       case OtpVerifyScreen.name:
-        widget = OtpVerifyScreen();
+        String args = settings.arguments as String;
+        widget = OtpVerifyScreen(email: args,);
         break;
 
       case SignInScreen.name:

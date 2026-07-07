@@ -145,6 +145,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password'**
   String get password;
+
+  /// No description provided for @createAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create An Account'**
+  String get createAnAccount;
+
+  /// No description provided for @signUpWithEmailPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with your email and password'**
+  String get signUpWithEmailPassword;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// No description provided for @alreadyHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? '**
+  String get alreadyHaveAnAccount;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email!'**
+  String get enterEmail;
+
+  /// No description provided for @enterFirstName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your first name!'**
+  String get enterFirstName;
+
+  /// No description provided for @enterLastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your last name!'**
+  String get enterLastName;
+
+  /// No description provided for @enterCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your city!'**
+  String get enterCity;
+
+  /// No description provided for @verifyYourOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Your OTP'**
+  String get verifyYourOtp;
+
+  /// No description provided for @otpSentToEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'A 4 digit OTP has been sent to your email address'**
+  String get otpSentToEmail;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get resendOtp;
+
+  /// No description provided for @otpExpireMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This code will expire in '**
+  String get otpExpireMessage;
 }
 
 class _AppLocalizationsDelegate

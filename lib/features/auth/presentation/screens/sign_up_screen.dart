@@ -34,6 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = context.localization;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -50,24 +51,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 20),
                     AppLogo(),
                     Text(
-                      'Create An Account',
+                      localization.createAnAccount,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Sign up with your email and password',
+                      localization.signUpWithEmailPassword,
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
                       controller: _emailTEController,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        hintText: context.localization.email,
-                      ),
+                      decoration: InputDecoration(hintText: localization.email),
                       validator: (String? input) => Validators.validateInput(
                         input,
-                        'Enter you first name !',
+                        localization.enterFirstName,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -76,11 +75,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _firstNameController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
-                        hintText: context.localization.firstName,
+                        hintText: localization.firstName,
                       ),
                       validator: (String? input) => Validators.validateInput(
                         input,
-                        'Enter you first name !',
+                        localization.enterFirstName,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -92,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       validator: (String? input) => Validators.validateInput(
                         input,
-                        'Enter your last name !',
+                        localization.enterLastName,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -101,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
 
                       decoration: InputDecoration(
-                        hintText: context.localization.mobile,
+                        hintText: localization.mobile,
                       ),
                       validator: (String? input) =>
                           Validators.validateMobile(input),
@@ -111,11 +110,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _cityTEController,
                       textInputAction: TextInputAction.next,
 
-                      decoration: InputDecoration(
-                        hintText: context.localization.city,
+                      decoration: InputDecoration(hintText: localization.city),
+                      validator: (String? input) => Validators.validateInput(
+                        input,
+                        localization.enterCity,
                       ),
-                      validator: (String? input) =>
-                          Validators.validateInput(input, 'Enter your city !'),
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
@@ -123,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        hintText: context.localization.password,
+                        hintText: localization.password,
                       ),
                       validator: (String? input) =>
                           Validators.validatePassword(input),
@@ -137,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else {
                           return FilledButton(
                             onPressed: _enableButton ? _onTapSingUp : null,
-                            child: const Text('Sign Up'),
+                            child: Text(localization.signUp),
                           );
                         }
                       },
@@ -145,13 +144,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 20),
                     RichText(
                       text: TextSpan(
-                        text: "Already have an account? ",
+                        text: localization.alreadyHaveAnAccount,
                         style: Theme.of(
                           context,
                         ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
                         children: [
                           TextSpan(
-                            text: 'Sign In',
+                            text: localization.signIn,
                             style: Theme.of(context).textTheme.bodyMedium!
                                 .copyWith(
                                   color: AppColors.themeColor,
@@ -195,7 +194,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (isSuccess) {
       if (mounted) {
-        Navigator.pushNamed(context, OtpVerifyScreen.name);
+        Navigator.pushNamed(
+          context,
+          OtpVerifyScreen.name,
+          arguments: _emailTEController.text.trim(),
+        );
       }
     } else {
       if (mounted) {
@@ -213,7 +216,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {});
   }
 
-  void _navigateToSignInScreen() {}
+  void _navigateToSignInScreen() {
+    Navigator.pop(context);
+  }
 
   @override
   void dispose() {

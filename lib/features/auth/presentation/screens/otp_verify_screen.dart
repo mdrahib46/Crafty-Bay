@@ -1,4 +1,7 @@
-
+import 'package:craftybay/app/extensions/localization_extension.dart';
+import 'package:craftybay/features/auth/data/model/otp_params.dart';
+import 'package:craftybay/features/auth/presentation/provider/otp_verification_provider.dart';
+import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +12,11 @@ import '../provider/otp_timer_provider.dart';
 import '../widgets/app_logo.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
-  const OtpVerifyScreen({super.key});
+  const OtpVerifyScreen({super.key, required this.email});
+
   static const String name = '/verify-otp';
+
+  final String email;
 
   @override
   State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
@@ -23,10 +29,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
   final OtpTimerProvider _otpTimerProvider = OtpTimerProvider();
 
-
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _otpTimerProvider.startTimer();
     });
     super.initState();
@@ -34,6 +39,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = context.localization;
     return ChangeNotifierProvider.value(
       value: _otpTimerProvider,
       child: Scaffold(
@@ -51,16 +57,17 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       const SizedBox(height: 80),
                       AppLogo(),
                       Text(
-                        'Verify Your OTP',
+                        localization.verifyYourOtp,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'A 4 digit OTP has been sent to your email address',
+                        localization.otpSentToEmail,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       const SizedBox(height: 20),
                       MaterialPinFormField(
+                        pinController: _pinInputController,
                         length: 4,
                         keyboardType: TextInputType.number,
                         theme: MaterialPinTheme(
@@ -85,27 +92,33 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
                       const SizedBox(height: 8),
 
-                      FilledButton(
-                        onPressed: _onTapSingIn,
-                        child: Text('Verify'),
+                      Consumer<OtpVerificationProvider>(
+                        builder: (context, otpProvider, child) {
+                          if (otpProvider.otpVerifyInProgress) {
+                            return Center(child: CircularProgressIndicator());
+                          } else {
+                            return FilledButton(
+                              onPressed: _onTapSingIn,
+                              child: Text(localization.verify),
+                            );
+                          }
+                        },
                       ),
                       const SizedBox(height: 20),
                       Consumer<OtpTimerProvider>(
                         builder: (context, _, _) {
-
-                          if(_otpTimerProvider.secondsLeft == 0){
-                            return  TextButton(
+                          if (_otpTimerProvider.secondsLeft == 0) {
+                            return TextButton(
                               onPressed: _navigateToSignUpScreen,
-                              child: Text('Resend OTP'),
+                              child: Text(localization.resendOtp),
                             );
                           }
 
                           return RichText(
                             text: TextSpan(
-                              text: "This code will be expire in ",
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
+                              text: localization.otpExpireMessage,
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .copyWith(color: Colors.grey),
                               children: [
                                 TextSpan(
                                   text: '${_otpTimerProvider.secondsLeft}s',
@@ -118,9 +131,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                               ],
                             ),
                           );
-                        }
+                        },
                       ),
-
                     ],
                   ),
                 ),
@@ -134,11 +146,29 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
   void _onTapSingIn() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainBottomNavScreen.name,
-        (route) => false,
-      );
+      _otpVerification();
+    }
+  }
+
+  Future<void> _otpVerification() async {
+    final provider = context.read<OtpVerificationProvider>();
+
+    OtpParams params = OtpParams(widget.email, _pinInputController.text);
+
+    final bool isSuccess = await provider.otpVerification(params);
+
+    if (isSuccess) {
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          MainBottomNavScreen.name,
+          (route) => false,
+        );
+      }
+    } else {
+      if (mounted) {
+        showSnackBarMessage(context, provider.errorMessage!, isError:  true);
+      }
     }
   }
 

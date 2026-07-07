@@ -31,4 +31,48 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get password => 'পাসওয়ার্ড';
+
+  @override
+  String get createAnAccount => 'একটি অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get signUpWithEmailPassword =>
+      'আপনার ইমেইল এবং পাসওয়ার্ড দিয়ে সাইন আপ করুন';
+
+  @override
+  String get signUp => 'সাইন আপ';
+
+  @override
+  String get alreadyHaveAnAccount => 'ইতোমধ্যে একটি অ্যাকাউন্ট আছে? ';
+
+  @override
+  String get signIn => ' সাইন ইন';
+
+  @override
+  String get enterEmail => 'আপনার ইমেইল লিখুন!';
+
+  @override
+  String get enterFirstName => 'আপনার প্রথম নাম লিখুন!';
+
+  @override
+  String get enterLastName => 'আপনার শেষ নাম লিখুন!';
+
+  @override
+  String get enterCity => 'আপনার শহরের নাম লিখুন!';
+
+  @override
+  String get verifyYourOtp => 'আপনার ওটিপি যাচাই করুন';
+
+  @override
+  String get otpSentToEmail =>
+      'আপনার ইমেইল ঠিকানায় ৪ সংখ্যার একটি ওটিপি পাঠানো হয়েছে';
+
+  @override
+  String get verify => 'যাচাই করুন';
+
+  @override
+  String get resendOtp => 'পুনরায় ওটিপি পাঠান';
+
+  @override
+  String get otpExpireMessage => 'এই কোডটির মেয়াদ শেষ হবে ';
 }
