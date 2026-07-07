@@ -53,7 +53,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('\$ 100', style: textTheme.bodyLarge),
+                        Text('\$ 100', style: textTheme.bodyLarge!.copyWith(color: AppColors.themeColor)),
                         Wrap(
                           children: [
                             Icon(Icons.star, color: Colors.amber, size: 18),

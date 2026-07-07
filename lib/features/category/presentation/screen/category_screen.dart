@@ -35,6 +35,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: GridView.builder(
+            itemCount: 20,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               mainAxisSpacing: 8,

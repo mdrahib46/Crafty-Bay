@@ -19,10 +19,10 @@ class CategoryCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: .all(12),
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: AppColors.themeColor.withAlpha(20),
-              borderRadius: .circular(8),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(Icons.computer, size: 48, color: AppColors.themeColor),
           ),
