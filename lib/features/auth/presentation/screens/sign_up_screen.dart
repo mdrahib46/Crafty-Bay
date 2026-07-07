@@ -1,12 +1,13 @@
-import 'package:craftybay/features/auth/data/model/signup_params.dart';
-import 'package:craftybay/features/auth/presentation/provider/sign_up_provider.dart';
-import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/extensions/localization_extension.dart';
 import '../../../shared/utils/validators.dart';
+import '../../../shared/widgets/show_snackbar_message.dart';
+import '../../data/model/signup_params.dart';
+import '../provider/sign_up_provider.dart';
 import '../widgets/app_logo.dart';
 import 'otp_verify_screen.dart';
 
@@ -29,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final SignUpProvider _signUpProvider = SignUpProvider();
+  bool _enableButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Center(
             child: Form(
               key: _formKey,
+              onChanged: _checkIfFormValid,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Padding(
                 padding: EdgeInsets.all(16),
@@ -128,9 +130,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 20),
 
-                    FilledButton(
-                      onPressed: _onTapSingUp,
-                      child: Text('Sign Up'),
+                    Consumer<SignUpProvider>(
+                      builder: (context, signupProvider, child) {
+                        if (signupProvider.signUpInProgress) {
+                          return CircularProgressIndicator();
+                        } else {
+                          return FilledButton(
+                            onPressed: _enableButton ? _onTapSingUp : null,
+                            child: const Text('Sign Up'),
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
                     RichText(
@@ -170,6 +180,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> _signUP() async {
+    final provider = context.read<SignUpProvider>();
+
     SignupParams signupParams = SignupParams(
       email: _emailTEController.text.trim(),
       firstName: _firstNameController.text.trim(),
@@ -179,7 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       password: _passwordTEController.text,
     );
 
-    final bool isSuccess = await _signUpProvider.signUp(signupParams);
+    final bool isSuccess = await provider.signUp(signupParams);
 
     if (isSuccess) {
       if (mounted) {
@@ -187,9 +199,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
     } else {
       if (mounted) {
-        showSnackBarMessage(context, _signUpProvider.errorMessage!);
+        showSnackBarMessage(context, provider.errorMessage!);
       }
     }
+  }
+
+  void _checkIfFormValid() {
+    if (_formKey.currentState!.validate()) {
+      _enableButton = true;
+    } else {
+      _enableButton = false;
+    }
+    setState(() {});
   }
 
   void _navigateToSignInScreen() {}

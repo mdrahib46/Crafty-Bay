@@ -1,4 +1,5 @@
 
+import 'package:craftybay/features/auth/presentation/provider/sign_up_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
         ChangeNotifierProvider.value(value: _themeModeProvider),
         ChangeNotifierProvider.value(value: _languageToggleProvider),
         ChangeNotifierProvider(create: (_)=> MainNavHolderProvider()),
+        ChangeNotifierProvider(create: (_)=> SignUpProvider()),
       ],
       child: Consumer<LanguageToggleProvider>(
         builder: (context, languageProvider, child) {
