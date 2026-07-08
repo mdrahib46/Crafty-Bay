@@ -49,7 +49,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get signIn => 'সাইন ইন';
 
   @override
-  String get welcomeBack => 'আবার স্বাগতম';
+  String get welcomeBack => 'আপানাকে স্বাগতম';
 
   @override
   String get signInWithEmailPassword =>

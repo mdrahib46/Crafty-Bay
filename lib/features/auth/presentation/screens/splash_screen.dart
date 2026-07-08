@@ -1,8 +1,8 @@
-
+import 'package:craftybay/app/controller/auth_controller.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:craftybay/features/shared/presentation/main_bottom_nav_screen.dart';
 import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-
 
 import '../../../shared/widgets/theme_toggle.dart';
 import '../../../shared/widgets/toggle_language.dart';
@@ -25,12 +25,25 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async {
     await Future.delayed(Duration(seconds: 5));
-    if (mounted) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        SignInScreen.name,
-        (route) => false,
-      );
+
+    bool isLoggedIn = await AuthController.isUserLoggedIn();
+
+    if (isLoggedIn) {
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          MainBottomNavScreen.name,
+          (route) => false,
+        );
+      }
+    } else {
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          SignInScreen.name,
+          (route) => false,
+        );
+      }
     }
   }
 
@@ -44,15 +57,11 @@ class _SplashScreenState extends State<SplashScreen> {
             const Spacer(),
             Center(child: AppLogo()),
 
-
             ThemeToggle(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-              const Text('Language: '),
-              LanguageToggle(),
-
-            ],),
+              children: [const Text('Language: '), LanguageToggle()],
+            ),
 
             const Spacer(),
             CircularProgressIndicator(),
@@ -68,9 +77,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-
-
-
-
-
