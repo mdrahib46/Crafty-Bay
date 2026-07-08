@@ -167,7 +167,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
       }
     } else {
       if (mounted) {
-        showSnackBarMessage(context, provider.errorMessage!, isError:  true);
+        showSnackBarMessage(context, provider.errorMessage!, isError: true);
       }
     }
   }
