@@ -1,7 +1,7 @@
 import 'dart:convert';
-
-import 'package:craftybay/features/shared/data/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../features/shared/data/model/user_model.dart';
 
 class AuthController {
   static const String _accessTokenKey = 'access-token';
