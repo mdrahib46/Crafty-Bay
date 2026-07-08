@@ -1,6 +1,10 @@
+import 'package:craftybay/features/auth/data/model/sign_in_params.dart';
+import 'package:craftybay/features/auth/presentation/provider/sign_in_provider.dart';
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/extensions/localization_extension.dart';
@@ -24,6 +28,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = context.localization;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -39,12 +45,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(height: 80),
                     AppLogo(),
                     Text(
-                      'Welcome Back',
+                      localization.welcomeBack,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Sign in with your email and password',
+                      localization.signInWithEmailPassword,
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                     const SizedBox(height: 20),
@@ -72,20 +78,28 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     const SizedBox(height: 20),
 
-                    FilledButton(
-                      onPressed: _onTapSingIn,
-                      child: Text('Sign In'),
+                    Consumer<SignInProvider>(
+                      builder: (context, signInProvider, child) {
+                        if (signInProvider.signInInProgress) {
+                          return Center(child: CircularProgressIndicator());
+                        } else {
+                          return FilledButton(
+                            onPressed: _onTapSingIn,
+                            child: Text(localization.signIn),
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
                     RichText(
                       text: TextSpan(
-                        text: "Don't have an account? ",
+                        text: localization.dontHaveAnAccount,
                         style: Theme.of(
                           context,
                         ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
                         children: [
                           TextSpan(
-                            text: 'Sign Up',
+                            text: localization.signUp,
                             style: Theme.of(context).textTheme.bodyMedium!
                                 .copyWith(
                                   color: AppColors.themeColor,
@@ -99,7 +113,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: const Text('Forgot Password'),
+                      child: Text(localization.forgotPassword),
                     ),
                   ],
                 ),
@@ -112,13 +126,33 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onTapSingIn() {
-    // if (_formKey.currentState!.validate()) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainBottomNavScreen.name,
-        (route) => false,
-      );
-    // }
+    if (_formKey.currentState!.validate()) {
+      _signIn();
+    }
+  }
+
+  Future<void> _signIn() async {
+    final provider = context.read<SignInProvider>();
+    SignInParams signInParams = SignInParams(
+      email: _emailTEController.text.trim(),
+      password: _passTEController.text,
+    );
+
+    final bool isSuccess = await provider.signIn(signInParams);
+
+    if (isSuccess) {
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          MainBottomNavScreen.name,
+          (route) => false,
+        );
+      }
+    } else {
+      if (mounted) {
+        showSnackBarMessage(context, provider.errorMessage!, isError: true);
+      }
+    }
   }
 
   void _navigateToSignUpScreen() {

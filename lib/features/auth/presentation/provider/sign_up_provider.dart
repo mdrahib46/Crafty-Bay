@@ -20,7 +20,7 @@ class SignUpProvider extends ChangeNotifier {
     notifyListeners();
 
     final NetworkResponse response = await getNetworkCaller().postRequest(
-      Urls.singUpUrl,
+      AppUrls.singUpUrl,
       body: params.toJson(),
     );
 

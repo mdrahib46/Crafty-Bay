@@ -23,7 +23,7 @@ class OtpVerificationProvider extends ChangeNotifier {
     notifyListeners();
 
     final NetworkResponse response = await getNetworkCaller().postRequest(
-      Urls.otpVerifyUrl,
+      AppUrls.otpVerifyUrl,
       body: params.toJson(),
     );
     if (response.isSuccess) {

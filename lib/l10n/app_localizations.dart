@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// No description provided for @mobile.
   ///
   /// In en, this message translates to:
-  /// **'Mobile'**
+  /// **'Mobile Number'**
   String get mobile;
 
   /// No description provided for @city.
@@ -149,7 +149,7 @@ abstract class AppLocalizations {
   /// No description provided for @createAnAccount.
   ///
   /// In en, this message translates to:
-  /// **'Create An Account'**
+  /// **'Create an Account'**
   String get createAnAccount;
 
   /// No description provided for @signUpWithEmailPassword.
@@ -176,28 +176,52 @@ abstract class AppLocalizations {
   /// **'Sign In'**
   String get signIn;
 
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// No description provided for @signInWithEmailPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with your email and password'**
+  String get signInWithEmailPassword;
+
+  /// No description provided for @dontHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? '**
+  String get dontHaveAnAccount;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password'**
+  String get forgotPassword;
+
   /// No description provided for @enterEmail.
   ///
   /// In en, this message translates to:
-  /// **'Enter your email!'**
+  /// **'Please enter your email!'**
   String get enterEmail;
 
   /// No description provided for @enterFirstName.
   ///
   /// In en, this message translates to:
-  /// **'Enter your first name!'**
+  /// **'Please enter your first name!'**
   String get enterFirstName;
 
   /// No description provided for @enterLastName.
   ///
   /// In en, this message translates to:
-  /// **'Enter your last name!'**
+  /// **'Please enter your last name!'**
   String get enterLastName;
 
   /// No description provided for @enterCity.
   ///
   /// In en, this message translates to:
-  /// **'Enter your city!'**
+  /// **'Please enter your city!'**
   String get enterCity;
 
   /// No description provided for @verifyYourOtp.
@@ -209,7 +233,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpSentToEmail.
   ///
   /// In en, this message translates to:
-  /// **'A 4 digit OTP has been sent to your email address'**
+  /// **'A 4-digit OTP has been sent to your email address'**
   String get otpSentToEmail;
 
   /// No description provided for @verify.

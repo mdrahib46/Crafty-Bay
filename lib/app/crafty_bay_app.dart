@@ -1,5 +1,6 @@
 
 import 'package:craftybay/features/auth/presentation/provider/otp_verification_provider.dart';
+import 'package:craftybay/features/auth/presentation/provider/sign_in_provider.dart';
 import 'package:craftybay/features/auth/presentation/provider/sign_up_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -41,6 +42,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
         ChangeNotifierProvider(create: (_)=> MainNavHolderProvider()),
         ChangeNotifierProvider(create: (_)=> SignUpProvider()),
         ChangeNotifierProvider(create: (_)=> OtpVerificationProvider()),
+        ChangeNotifierProvider(create: (_)=> SignInProvider()),
       ],
       child: Consumer<LanguageToggleProvider>(
         builder: (context, languageProvider, child) {

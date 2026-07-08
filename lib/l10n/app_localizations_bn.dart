@@ -46,7 +46,20 @@ class AppLocalizationsBn extends AppLocalizations {
   String get alreadyHaveAnAccount => 'ইতোমধ্যে একটি অ্যাকাউন্ট আছে? ';
 
   @override
-  String get signIn => ' সাইন ইন';
+  String get signIn => 'সাইন ইন';
+
+  @override
+  String get welcomeBack => 'আবার স্বাগতম';
+
+  @override
+  String get signInWithEmailPassword =>
+      'আপনার ইমেইল এবং পাসওয়ার্ড দিয়ে সাইন ইন করুন';
+
+  @override
+  String get dontHaveAnAccount => 'অ্যাকাউন্ট নেই? ';
+
+  @override
+  String get forgotPassword => 'পাসওয়ার্ড ভুলে গেছেন?';
 
   @override
   String get enterEmail => 'আপনার ইমেইল লিখুন!';
