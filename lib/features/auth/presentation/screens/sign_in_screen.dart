@@ -1,7 +1,5 @@
-import 'package:craftybay/features/auth/data/model/sign_in_params.dart';
-import 'package:craftybay/features/auth/presentation/provider/sign_in_provider.dart';
+
 import 'package:craftybay/features/auth/presentation/screens/sign_up_screen.dart';
-import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +8,10 @@ import '../../../../app/app_colors.dart';
 import '../../../../app/extensions/localization_extension.dart';
 import '../../../shared/presentation/main_bottom_nav_screen.dart';
 import '../../../shared/utils/validators.dart';
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
+import '../../../shared/widgets/show_snackbar_message.dart';
+import '../../data/model/sign_in_params.dart';
+import '../provider/sign_in_provider.dart';
 import '../widgets/app_logo.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -81,7 +83,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Consumer<SignInProvider>(
                       builder: (context, signInProvider, child) {
                         if (signInProvider.signInInProgress) {
-                          return Center(child: CircularProgressIndicator());
+                          return CenterCircularProgressIndicator();
                         } else {
                           return FilledButton(
                             onPressed: _onTapSingIn,

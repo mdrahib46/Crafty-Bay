@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../shared/presentation/main_bottom_nav_screen.dart';
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../provider/otp_timer_provider.dart';
 import '../widgets/app_logo.dart';
 
@@ -95,7 +96,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       Consumer<OtpVerificationProvider>(
                         builder: (context, otpProvider, child) {
                           if (otpProvider.otpVerifyInProgress) {
-                            return Center(child: CircularProgressIndicator());
+                            return CenterCircularProgressIndicator();
                           } else {
                             return FilledButton(
                               onPressed: _onTapSingIn,
@@ -182,3 +183,5 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
     super.dispose();
   }
 }
+
+

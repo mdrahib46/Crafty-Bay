@@ -1,9 +1,10 @@
-import 'package:craftybay/app/controller/auth_controller.dart';
+
 import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
-import 'package:craftybay/features/shared/presentation/main_bottom_nav_screen.dart';
 import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app/controller/auth_controller.dart';
+import '../../../shared/presentation/main_bottom_nav_screen.dart';
 import '../../../shared/widgets/theme_toggle.dart';
 import '../../../shared/widgets/toggle_language.dart';
 import '../widgets/app_logo.dart';
