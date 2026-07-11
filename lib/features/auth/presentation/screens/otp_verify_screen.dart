@@ -29,6 +29,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final OtpTimerProvider _otpTimerProvider = OtpTimerProvider();
+  final OtpVerificationProvider _otpVerificationProvider = OtpVerificationProvider();
 
   @override
   void initState() {
@@ -41,8 +42,11 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   @override
   Widget build(BuildContext context) {
     final localization = context.localization;
-    return ChangeNotifierProvider.value(
-      value: _otpTimerProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: _otpTimerProvider),
+        ChangeNotifierProvider.value(value: _otpVerificationProvider),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -94,8 +98,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       const SizedBox(height: 8),
 
                       Consumer<OtpVerificationProvider>(
-                        builder: (context, otpProvider, child) {
-                          if (otpProvider.otpVerifyInProgress) {
+                        builder: (context, _, child) {
+                          if (_otpVerificationProvider.otpVerifyInProgress) {
                             return CenterCircularProgressIndicator();
                           } else {
                             return FilledButton(
@@ -152,11 +156,11 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   }
 
   Future<void> _otpVerification() async {
-    final provider = context.read<OtpVerificationProvider>();
+    // final provider = context.read<OtpVerificationProvider>();
 
     OtpParams params = OtpParams(widget.email, _pinInputController.text);
 
-    final bool isSuccess = await provider.otpVerification(params);
+    final bool isSuccess = await _otpVerificationProvider.otpVerification(params);
 
     if (isSuccess) {
       if (mounted) {
@@ -168,7 +172,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
       }
     } else {
       if (mounted) {
-        showSnackBarMessage(context, provider.errorMessage!, isError: true);
+        showSnackBarMessage(context, _otpVerificationProvider.errorMessage!, isError: true);
       }
     }
   }

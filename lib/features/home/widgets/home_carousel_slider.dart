@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:craftybay/features/home/presentation/provider/home_carousel_slider_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app/app_colors.dart';
 
@@ -15,7 +17,7 @@ class HomeCarouselSlider extends StatefulWidget {
 class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
 
   final List _carouselItemList = [1, 2, 3, 4, 5, 6];
-  ValueNotifier<int> _currentIndex = ValueNotifier(0);
+  final ValueNotifier<int> _currentIndex = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -69,29 +71,22 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                     ),
                   ),
               ],
-              // List.generate(_carouselItemList.length, (int index) {
-              //
-              //   return Container(
-              //     margin: const EdgeInsets.symmetric(horizontal: 4),
-              //     height: 10,
-              //     width: 10,
-              //     decoration: BoxDecoration(
-              //       shape: BoxShape.circle,
-              //       color: _currentIndex == index
-              //           ? AppColors.themeColor
-              //           : Colors.white,
-              //       border: BoxBorder.all(
-              //         color: _currentIndex == index
-              //             ? AppColors.themeColor
-              //             : Colors.grey,
-              //       ),
-              //     ),
-              //   );
-              // }),
             );
           },
         ),
       ],
     );
   }
+
+  Future<void> homeCarouselSlider () async{
+    final provider = context.read<HomeCarouselSliderProvider>();
+
+    final bool isSuccess = await provider.homeCarouselSlider();
+    if(isSuccess){
+
+    }
+
+
+  }
+
 }

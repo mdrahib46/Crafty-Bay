@@ -7,8 +7,8 @@ import 'package:craftybay/features/shared/data/model/user_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class SignInProvider extends ChangeNotifier {
-  bool _signInInPrgress = false;
-  bool get signInInProgress => _signInInPrgress;
+  bool _signInInProgress = false;
+  bool get signInInProgress => _signInInProgress;
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
@@ -16,7 +16,7 @@ class SignInProvider extends ChangeNotifier {
   Future<bool> signIn(SignInParams params) async {
     bool isSuccess = false;
 
-    _signInInPrgress = true;
+    _signInInProgress = true;
     notifyListeners();
 
     NetworkResponse response = await getNetworkCaller().postRequest(
@@ -30,9 +30,6 @@ class SignInProvider extends ChangeNotifier {
       );
       String accessToken = response.responseBody!['data']['token'];
 
-      print(
-        'User Model =>${userModel.toJson()}\n Access Token => $accessToken',
-      );
 
       await AuthController.saveUserData(accessToken, userModel);
 
@@ -42,6 +39,9 @@ class SignInProvider extends ChangeNotifier {
       isSuccess = false;
       _errorMessage = response.errorMessage;
     }
+
+    _signInInProgress = false;
+    notifyListeners();
 
     return isSuccess;
   }

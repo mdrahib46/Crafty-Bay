@@ -6,5 +6,6 @@ class AppUrls {
   static const  String singUpUrl = "$_baseUrl/auth/signup";
   static const  String otpVerifyUrl = "$_baseUrl/auth/verify-otp";
   static const  String signInUrl = "$_baseUrl/auth/login";
+  static const  String homeCarouselSlides = "$_baseUrl/slides";
 
 }
