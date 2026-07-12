@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../app/get_network_caller.dart';
@@ -15,33 +14,31 @@ class HomeCarouselSliderProvider extends ChangeNotifier {
 
   String? get errorMessage => _errorMessage;
 
-  final List<HomeCarouselSliderModel> _homeSlider = [];
+  List<HomeCarouselSliderModel> _homeSlider = [];
   List<HomeCarouselSliderModel> get homeSlider => _homeSlider;
 
   Future<bool> homeCarouselSlider() async {
     bool isSuccess = false;
+
     _sliderInProgress = true;
     notifyListeners();
 
     final NetworkResponse response = await getNetworkCaller().getRequest(
       AppUrls.homeCarouselSlides,
     );
-
     if (response.isSuccess) {
+      List<HomeCarouselSliderModel> sliderModel = [];
 
-      List<HomeCarouselSliderModel> sliders = [];
-
-      for(Map<String, dynamic> slider in response.responseBody!['data']['result']){
-        sliders.add(HomeCarouselSliderModel.fromJson(slider));
+      for (Map<String, dynamic> model
+          in response.responseBody['data']['results']) {
+        sliderModel.add(HomeCarouselSliderModel.fromJson(model));
       }
-
-      // TODO:- Implement sliders in Home Screen
-
+      _homeSlider = sliderModel;
       isSuccess = true;
       _errorMessage = null;
     } else {
       isSuccess = false;
-      _errorMessage = response.errorMessage!;
+      _errorMessage = response.errorMessage;
     }
 
     _sliderInProgress = false;

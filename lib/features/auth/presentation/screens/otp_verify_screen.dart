@@ -29,7 +29,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final OtpTimerProvider _otpTimerProvider = OtpTimerProvider();
-  final OtpVerificationProvider _otpVerificationProvider = OtpVerificationProvider();
+  final OtpVerificationProvider _otpVerificationProvider =
+      OtpVerificationProvider();
 
   @override
   void initState() {
@@ -160,7 +161,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
     OtpParams params = OtpParams(widget.email, _pinInputController.text);
 
-    final bool isSuccess = await _otpVerificationProvider.otpVerification(params);
+    final bool isSuccess = await _otpVerificationProvider.otpVerification(
+      params,
+    );
 
     if (isSuccess) {
       if (mounted) {
@@ -172,7 +175,11 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
       }
     } else {
       if (mounted) {
-        showSnackBarMessage(context, _otpVerificationProvider.errorMessage!, isError: true);
+        showSnackBarMessage(
+          context,
+          _otpVerificationProvider.errorMessage!,
+          isError: true,
+        );
       }
     }
   }
@@ -187,5 +194,3 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
     super.dispose();
   }
 }
-
-

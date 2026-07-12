@@ -60,7 +60,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
                 onGenerateRoute: AppRoutes.onGenerateRoute,
                 supportedLocales: [Locale('en'), Locale('bn')],
                 localizationsDelegates: [
-                  AppLocalizations.delegate, // Add this line
+                  AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,

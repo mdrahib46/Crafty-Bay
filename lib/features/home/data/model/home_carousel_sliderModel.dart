@@ -2,34 +2,37 @@ class HomeCarouselSliderModel {
   String? sId;
   String? photoUrl;
   String? description;
-  Null product;
+  dynamic product;
   String? brand;
-  Null category;
+  dynamic category;
   String? createdAt;
   String? updatedAt;
   int? iV;
 
-  HomeCarouselSliderModel(
-      {this.sId,
-        this.photoUrl,
-        this.description,
-        this.product,
-        this.brand,
-        this.category,
-        this.createdAt,
-        this.updatedAt,
-        this.iV});
+  HomeCarouselSliderModel({
+    this.sId,
+    this.photoUrl,
+    this.description,
+    this.product,
+    this.brand,
+    this.category,
+    this.createdAt,
+    this.updatedAt,
+    this.iV,
+  });
 
-  HomeCarouselSliderModel.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    photoUrl = json['photo_url'];
-    description = json['description'];
-    product = json['product'];
-    brand = json['brand'];
-    category = json['category'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    iV = json['__v'];
+  factory HomeCarouselSliderModel.fromJson(Map<String, dynamic> jsonData) {
+    return HomeCarouselSliderModel(
+      sId: jsonData['_id'],
+      photoUrl: jsonData['photo_url'],
+      description: jsonData['description'],
+      product: jsonData['product'],
+      brand: jsonData['brand'],
+      category: jsonData['category'],
+      createdAt: jsonData['createdAt'],
+      updatedAt: jsonData['updatedAt'],
+      iV: jsonData['__v'],
+    );
   }
 
   Map<String, dynamic> toJson() {
