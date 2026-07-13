@@ -20,7 +20,6 @@ class MainBottomNavScreen extends StatefulWidget {
 }
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
-  // final MainNavHolderProvider _mainNavHolderProvider = MainNavHolderProvider();
 
   final HomeCarouselSliderProvider _carouselSliderProvider = HomeCarouselSliderProvider();
 
