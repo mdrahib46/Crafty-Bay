@@ -30,6 +30,7 @@ class AppNetworkImage extends StatelessWidget {
         placeholder: AppShimmer(),
         errorBuilder: (context, errorImage, stackTrace)=> Icon(Icons.image),
       ),
+      // child: Image.network(url),
     );
   }
 }
