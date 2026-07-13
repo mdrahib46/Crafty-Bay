@@ -24,8 +24,6 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
     return Consumer<HomeCarouselSliderProvider>(
       builder: (context, carouselProvider, child) {
 
-        print(carouselProvider.homeSlider.length);
-
         if(carouselProvider.sliderInProgress){
           return SizedBox(
               height: 180,
@@ -47,16 +45,9 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               ),
 
               items: carouselProvider.homeSlider.map((slide) {
+                print(slide.photoUrl!);
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  // decoration: BoxDecoration(
-                  //   borderRadius: BorderRadius.circular(8),
-                  //   color: AppColors.themeColor,
-                  //   image: DecorationImage(
-                  //     image: NetworkImage(slide.photoUrl ?? ''),
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
                   
                   child: AppNetworkImage(url: slide.photoUrl!),
                 );
@@ -92,19 +83,4 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
       }
     );
   }
-
-  // Future<void> _getHomeCarouselSlider() async {
-  //   final provider = context.read<HomeCarouselSliderProvider>();
-  //
-  //   final bool isSuccess = await provider.homeCarouselSlider();
-  //
-  //   if (!mounted) return;
-  //   if (!isSuccess) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(provider.errorMessage ?? "Something went wrong...!"),
-  //       ),
-  //     );
-  //   }
-  // }
 }

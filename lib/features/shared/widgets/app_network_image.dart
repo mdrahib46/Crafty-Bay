@@ -1,3 +1,5 @@
+import 'package:cache_network_media/cache_network_media.dart';
+import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
 import 'package:craftybay/features/shared/widgets/no_image.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +21,22 @@ class AppNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius ?? 0),
-      child: CachedNetworkImage(
-        imageUrl: url,
+      borderRadius: BorderRadius.circular(borderRadius ?? 8),
+      // child: CachedNetworkImage(
+      //   imageUrl: url,
+      //   width: width,
+      //   height: height,
+      //   fit: fit ?? BoxFit.cover,
+      //   errorWidget: (context, url, error) => NoImage() ,
+      //   progressIndicatorBuilder: (context, url, downloadInProgress)=> NoImage(),
+      // ),
+      child: CacheNetworkMediaWidget.img(
+        url: url,
         width: width,
         height: height,
         fit: fit ?? BoxFit.cover,
-        errorWidget: (context, url, error) => NoImage() ,
-        progressIndicatorBuilder: (context, url, downloadInProgress)=> NoImage(),
+        placeholder: CenterCircularProgressIndicator(),
+        // errorBuilder: (context, error, _)=> NoImage(),
       ),
     );
   }

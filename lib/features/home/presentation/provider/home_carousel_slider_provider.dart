@@ -21,7 +21,6 @@ class HomeCarouselSliderProvider extends ChangeNotifier {
     bool isSuccess = false;
 
     _sliderInProgress = true;
-    print('Notify Listener Called');
     notifyListeners();
 
     final NetworkResponse response = await getNetworkCaller().getRequest(
@@ -43,7 +42,6 @@ class HomeCarouselSliderProvider extends ChangeNotifier {
     }
 
     _sliderInProgress = false;
-    print('Notify Listener Called');
     notifyListeners();
 
     return isSuccess;
