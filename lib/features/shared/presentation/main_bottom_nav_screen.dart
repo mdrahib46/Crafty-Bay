@@ -1,6 +1,4 @@
 
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +20,9 @@ class MainBottomNavScreen extends StatefulWidget {
 }
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
-  final MainNavHolderProvider _mainNavHolderProvider = MainNavHolderProvider();
+  // final MainNavHolderProvider _mainNavHolderProvider = MainNavHolderProvider();
+
+  final HomeCarouselSliderProvider _carouselSliderProvider = HomeCarouselSliderProvider();
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -33,28 +33,30 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_)async{
-      await context.read<HomeCarouselSliderProvider>().homeCarouselSlider();
-    });
+    _carouselSliderProvider.homeCarouselSlider();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     print("Main Bottom Screen");
-    return ChangeNotifierProvider.value(
-      value: _mainNavHolderProvider,
+    return MultiProvider(
+      providers: [
+        // ChangeNotifierProvider.value(value: _mainNavHolderProvider),
+        ChangeNotifierProvider.value(value: _carouselSliderProvider),
+      ],
       child: Consumer<MainNavHolderProvider>(
-        builder: (context, _, _) {
+        builder: (context, navHolderProvider,_) {
           return Scaffold(
-            body: _screens[_mainNavHolderProvider.currentIndex],
+            body: _screens[navHolderProvider.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
               unselectedItemColor: Colors.grey,
               selectedItemColor: AppColors.themeColor,
               showSelectedLabels: true,
               showUnselectedLabels: true,
-              currentIndex: _mainNavHolderProvider.currentIndex,
-              onTap: _mainNavHolderProvider.changeIndex,
+              currentIndex: navHolderProvider.currentIndex,
+              onTap: navHolderProvider.changeIndex,
 
               items: [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -73,7 +75,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
               ],
             ),
           );
-        },
+        }
       ),
     );
   }
