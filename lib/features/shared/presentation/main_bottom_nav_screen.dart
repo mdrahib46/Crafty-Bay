@@ -1,14 +1,16 @@
 
-import 'package:craftybay/features/home/presentation/provider/home_carousel_slider_provider.dart';
-import 'package:craftybay/features/shared/presentation/providers/main_nav_holder_provider.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app/app_colors.dart';
 import '../../cart/presentation/screen/cart_screen.dart';
 import '../../category/presentation/screen/category_screen.dart';
+import '../../home/presentation/provider/home_carousel_slider_provider.dart';
 import '../../home/presentation/screen/home_screen.dart';
 import '../../wish_list/presentation/screen/wish_list_screen.dart';
+import 'providers/main_nav_holder_provider.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});

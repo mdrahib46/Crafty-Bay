@@ -2,8 +2,8 @@ import 'package:craftybay/app/asset_path.dart';
 import 'package:flutter/material.dart';
 
 
-class NoImage extends StatelessWidget {
-  const NoImage({super.key});
+class ErrorImage extends StatelessWidget {
+  const ErrorImage({super.key});
 
   @override
   Widget build(BuildContext context) {
