@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../app/app_colors.dart';
 import '../../shared/widgets/app_network_image.dart';
-import '../../shared/widgets/center_circular_progress_indicator.dart';
+import '../../shared/widgets/app_shimmer.dart';
 import '../presentation/provider/home_carousel_slider_provider.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
@@ -43,9 +43,9 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
     return Consumer<HomeCarouselSliderProvider>(
       builder: (context, carouselProvider, child) {
         if (carouselProvider.sliderInProgress) {
-          return const SizedBox(
+          return SizedBox(
             height: 180,
-            child: CenterCircularProgressIndicator(),
+            child: AppShimmer(),
           );
         }
 

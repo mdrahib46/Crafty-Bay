@@ -1,5 +1,6 @@
 import 'package:cache_network_media/cache_network_media.dart';
-import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
+import 'package:craftybay/features/shared/widgets/app_shimmer.dart';
+// import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 
@@ -26,7 +27,7 @@ class AppNetworkImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit ?? BoxFit.cover,
-        placeholder: CenterCircularProgressIndicator(),
+        placeholder: AppShimmer(),
         errorBuilder: (context, errorImage, stackTrace)=> Icon(Icons.image),
       ),
     );
