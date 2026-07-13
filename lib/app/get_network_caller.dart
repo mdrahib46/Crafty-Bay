@@ -6,7 +6,7 @@ NetworkCaller getNetworkCaller() {
     headers: () => {
       'content-type': 'application/json',
       if (AuthController.accessToken != null)
-        'token': AuthController.accessToken ?? '',
+        'token': AuthController.accessToken!,
     },
   );
 }

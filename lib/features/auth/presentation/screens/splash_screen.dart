@@ -1,13 +1,13 @@
 
-import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
-import 'package:craftybay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/controller/auth_controller.dart';
+import '../../../../app/extensions/localization_extension.dart';
 import '../../../shared/presentation/main_bottom_nav_screen.dart';
 import '../../../shared/widgets/theme_toggle.dart';
 import '../../../shared/widgets/toggle_language.dart';
 import '../widgets/app_logo.dart';
+import 'sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
             CircularProgressIndicator(),
             const SizedBox(height: 16),
             Text(
-              '${AppLocalizations.of(context)!.version}: 1.0.0',
+              '${context.localization.version}: 1.0.0',
               style: TextStyle(color: Colors.grey.shade500, fontSize: 16),
             ),
             const SizedBox(height: 16),

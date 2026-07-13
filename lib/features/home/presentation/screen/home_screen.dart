@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shared/providers/main_nav_holder_provider.dart';
+import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/widgets/product_card.dart';
 import '../../widgets/home_appbar.dart';
 import '../../widgets/home_carousel_slider.dart';
@@ -20,84 +20,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final HomeCarouselSliderProvider _carouselSliderProvider =
-      HomeCarouselSliderProvider();
+  // final HomeCarouselSliderProvider _carouselSliderProvider =
+  //     HomeCarouselSliderProvider();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar(),
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(value: _carouselSliderProvider),
-        ],
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                ProductSearchBar(),
-                const SizedBox(height: 8),
-                HomeCarouselSlider(),
-                const SizedBox(height: 16),
-                HomeSectionHeader(
-                  title: 'All Categories',
-                  onTap: () {
-                    context.read<MainNavHolderProvider>().navigateToCategory();
-                  },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              ProductSearchBar(),
+              const SizedBox(height: 8),
+              HomeCarouselSlider(),
+              const SizedBox(height: 16),
+              HomeSectionHeader(
+                title: 'All Categories',
+                onTap: () {
+                  context.read<MainNavHolderProvider>().navigateToCategory();
+                },
+              ),
+              const SizedBox(height: 8),
+              HomeCategorySection(),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: 'Popular', onTap: () {}),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map((e) => ProductCard()).toList(),
                 ),
-                const SizedBox(height: 8),
-                HomeCategorySection(),
-                const SizedBox(height: 8),
-                HomeSectionHeader(title: 'Popular', onTap: () {}),
-                const SizedBox(height: 8),
-                SingleChildScrollView(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                    ].map((e) => ProductCard()).toList(),
-                  ),
+              ),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: 'Special', onTap: () {}),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map((e) => ProductCard()).toList(),
                 ),
-                const SizedBox(height: 8),
-                HomeSectionHeader(title: 'Special', onTap: () {}),
-                const SizedBox(height: 8),
-                SingleChildScrollView(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                    ].map((e) => ProductCard()).toList(),
-                  ),
+              ),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: 'New', onTap: () {}),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                  ].map((e) => ProductCard()).toList(),
                 ),
-                const SizedBox(height: 8),
-                HomeSectionHeader(title: 'New', onTap: () {}),
-                const SizedBox(height: 8),
-                SingleChildScrollView(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                    ].map((e) => ProductCard()).toList(),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

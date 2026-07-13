@@ -3,9 +3,11 @@ class AppUrls {
 
   static const String _baseUrl = 'https://ecom-rs8e.onrender.com/api';
 
-  static const  String singUpUrl = "$_baseUrl/auth/signup";
-  static const  String otpVerifyUrl = "$_baseUrl/auth/verify-otp";
-  static const  String signInUrl = "$_baseUrl/auth/login";
-  static const  String homeCarouselSlides = "$_baseUrl/slides";
+  static const String singUpUrl = "$_baseUrl/auth/signup";
+  static const String otpVerifyUrl = "$_baseUrl/auth/verify-otp";
+  static const String signInUrl = "$_baseUrl/auth/login";
+  static const String homeCarouselSlides = "$_baseUrl/slides";
 
+  static String getCategory(int pageSize, int pageNo) =>
+      "$_baseUrl/categories?page=$pageNo?count=$pageSize";
 }

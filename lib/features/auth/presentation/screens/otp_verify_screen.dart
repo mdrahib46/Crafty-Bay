@@ -1,15 +1,16 @@
-import 'package:craftybay/app/extensions/localization_extension.dart';
-import 'package:craftybay/features/auth/data/model/otp_params.dart';
-import 'package:craftybay/features/auth/presentation/provider/otp_verification_provider.dart';
-import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/extensions/localization_extension.dart';
 import '../../../shared/presentation/main_bottom_nav_screen.dart';
 import '../../../shared/widgets/center_circular_progress_indicator.dart';
+import '../../../shared/widgets/show_snackbar_message.dart';
+import '../../data/model/otp_params.dart';
 import '../provider/otp_timer_provider.dart';
+import '../provider/otp_verification_provider.dart';
 import '../widgets/app_logo.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
@@ -157,7 +158,6 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   }
 
   Future<void> _otpVerification() async {
-    // final provider = context.read<OtpVerificationProvider>();
 
     OtpParams params = OtpParams(widget.email, _pinInputController.text);
 

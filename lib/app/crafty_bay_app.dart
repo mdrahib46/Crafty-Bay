@@ -1,14 +1,12 @@
 
-import 'package:craftybay/features/auth/presentation/provider/otp_verification_provider.dart';
-import 'package:craftybay/features/auth/presentation/provider/sign_in_provider.dart';
-import 'package:craftybay/features/auth/presentation/provider/sign_up_provider.dart';
-import 'package:craftybay/features/home/presentation/provider/home_carousel_slider_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/screens/splash_screen.dart';
-import '../features/shared/providers/main_nav_holder_provider.dart';
+import '../features/home/presentation/provider/home_carousel_slider_provider.dart';
+import '../features/shared/presentation/providers/main_nav_holder_provider.dart';
 import '../l10n/app_localizations.dart';
 import 'app_theme.dart';
 import 'providers/language_toggle_provider.dart';
@@ -41,9 +39,6 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
         ChangeNotifierProvider.value(value: _themeModeProvider),
         ChangeNotifierProvider.value(value: _languageToggleProvider),
         ChangeNotifierProvider(create: (_)=> MainNavHolderProvider()),
-        ChangeNotifierProvider(create: (_)=> SignUpProvider()),
-        ChangeNotifierProvider(create: (_)=> OtpVerificationProvider()),
-        ChangeNotifierProvider(create: (_)=> SignInProvider()),
         ChangeNotifierProvider(create: (_)=> HomeCarouselSliderProvider()),
       ],
       child: Consumer<LanguageToggleProvider>(
