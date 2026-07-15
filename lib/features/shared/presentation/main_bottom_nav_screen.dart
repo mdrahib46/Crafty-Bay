@@ -8,6 +8,7 @@ import '../../category/presentation/screen/category_screen.dart';
 import '../../home/presentation/provider/home_carousel_slider_provider.dart';
 import '../../home/presentation/screen/home_screen.dart';
 import '../../wish_list/presentation/screen/wish_list_screen.dart';
+import 'providers/category_list_provider.dart';
 import 'providers/main_nav_holder_provider.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class MainBottomNavScreen extends StatefulWidget {
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   final HomeCarouselSliderProvider _carouselSliderProvider = HomeCarouselSliderProvider();
+  final CategoryListProvider _categoryListProvider = CategoryListProvider();
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -42,8 +44,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     print("Main Bottom Screen");
     return MultiProvider(
       providers: [
-        // ChangeNotifierProvider.value(value: _mainNavHolderProvider),
         ChangeNotifierProvider.value(value: _carouselSliderProvider),
+        ChangeNotifierProvider.value(value: _categoryListProvider)
       ],
       child: Consumer<MainNavHolderProvider>(
         builder: (context, navHolderProvider,_) {

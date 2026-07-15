@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../app/get_network_caller.dart';
@@ -7,7 +6,7 @@ import '../../../../core/service/network_caller/network_caller.dart';
 import '../../data/model/category_model.dart';
 
 class CategoryListProvider extends ChangeNotifier {
-  final int _pageCount = 20;
+  final int _pageCount = 32;
   int _currentPage = 0;
   int? _lastPage;
 
@@ -75,6 +74,13 @@ class CategoryListProvider extends ChangeNotifier {
   }
 
   bool get isFirstRequest => _currentPage == 0;
+
+  void refreshCategoryList() {
+    _currentPage = 0;
+    _lastPage = null;
+    _categoryList.clear();
+    getCategory();
+  }
 
   bool get isLoading => getInitialInProgress || _getMoreDataInProgress;
 }
