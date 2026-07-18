@@ -1,12 +1,16 @@
+
 import 'package:flutter/material.dart';
 
-import '../../shared/widgets/category_card.dart';
+
+
 
 
 class HomeCategorySection extends StatelessWidget {
   const HomeCategorySection({
     super.key,
   });
+
+  // final CategoryModel categoryModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class HomeCategorySection extends StatelessWidget {
         scrollDirection: .horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return CategoryCard();
+          // return CategoryCard(categoryModel: categoryModel);
         },
         separatorBuilder: (context, index) {
           return SizedBox(width: 8,);

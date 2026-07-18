@@ -9,5 +9,5 @@ class AppUrls {
   static const String homeCarouselSlides = "$_baseUrl/slides";
 
   static String getCategory(int pageSize, int pageNo) =>
-      "$_baseUrl/categories?page=$pageNo?count=$pageSize";
+      "$_baseUrl/categories?count=$pageSize&page=$pageNo";
 }

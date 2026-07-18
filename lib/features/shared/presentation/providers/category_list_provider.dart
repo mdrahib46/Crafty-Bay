@@ -6,81 +6,82 @@ import '../../../../core/service/network_caller/network_caller.dart';
 import '../../data/model/category_model.dart';
 
 class CategoryListProvider extends ChangeNotifier {
-  final int _pageCount = 32;
-  int _currentPage = 0;
-  int? _lastPage;
+  bool _isInitialLoading = false;
+  bool get isInitialLoading => _isInitialLoading;
 
-  /// Initial data is loading
-  bool _getInitialInProgress = false;
-
-  bool get getInitialInProgress => _getInitialInProgress;
-
-  /// More data is loading
-  bool _getMoreDataInProgress = false;
-
-  bool get getMoreDataInProgress => _getMoreDataInProgress;
-
-  List<CategoryModel> _categoryList = [];
-
-  List<CategoryModel> get categoryList => _categoryList;
+  bool _isLoadingMore = false;
+  bool get isLoadingMore => _isLoadingMore;
 
   String? _errorMessage;
-
   String? get errorMessage => _errorMessage;
 
-  Future<bool> getCategory() async {
-    /// To Stop Pagination
-    if (_lastPage != null && _currentPage >= _lastPage!) {
+  final List<CategoryModel> _categoryList = [];
+  List<CategoryModel> get categoryList => _categoryList;
+
+  int? _lastPage;
+  int _currentPage = 0;
+  final int _categoryPerPage = 32;
+
+  Future<bool> getCategoryData() async {
+    bool isSuccess = false;
+
+    /// Current page is greater then last page or is that initial page
+    if (_currentPage == 0 || (_lastPage != null && _currentPage < _lastPage!)) {
+      _currentPage++;
+    } else {
       return false;
     }
 
-    bool isSuccess = false;
-    _currentPage++;
-
-    if (isFirstRequest) {
-      _getInitialInProgress = true;
+    if (_currentPage == 1) {
+      _isInitialLoading = true;
     } else {
-      _getMoreDataInProgress = true;
+      _isLoadingMore = true;
     }
     notifyListeners();
 
-    final NetworkResponse response = await getNetworkCaller().getRequest(
-      AppUrls.getCategory(_pageCount, _currentPage),
+    /// Call API form here
+    NetworkResponse response = await getNetworkCaller().getRequest(
+      AppUrls.getCategory(_categoryPerPage, _currentPage),
     );
 
     if (response.isSuccess) {
-      List<CategoryModel> categories = [];
-      _lastPage = response.responseBody['data']['last_page'];
-      for (Map<String, dynamic> category
+      List<CategoryModel> list = [];
+
+      for (Map<String, dynamic> jsonData
           in response.responseBody['data']['results']) {
-        categories.add(CategoryModel.fromJson(category));
+        list.add(CategoryModel.fromJson(jsonData));
       }
-      _categoryList.addAll(categories);
-      isSuccess = true;
-      _errorMessage = null;
+
+      _categoryList.addAll(list);
+
+      _lastPage = response.responseBody['data']['last_page'];
+
+      // isSuccess = true;
+      // _errorMessage = null;
     } else {
-      isSuccess = false;
       _errorMessage = response.errorMessage;
+      // _currentPage --;
     }
 
-    if (isFirstRequest) {
-      _getInitialInProgress = false;
+    if (_currentPage == 1) {
+      _isInitialLoading = false;
     } else {
-      _getMoreDataInProgress = false;
+      _isLoadingMore = false;
     }
     notifyListeners();
 
     return isSuccess;
   }
 
-  bool get isFirstRequest => _currentPage == 0;
-
-  void refreshCategoryList() {
+  void refreshCategory() {
     _currentPage = 0;
     _lastPage = null;
     _categoryList.clear();
-    getCategory();
+    getCategoryData();
   }
 
-  bool get isLoading => getInitialInProgress || _getMoreDataInProgress;
+  bool get isLoading => _isInitialLoading || _isLoadingMore;
 }
+
+
+

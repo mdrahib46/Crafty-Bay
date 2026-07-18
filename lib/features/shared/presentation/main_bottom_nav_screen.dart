@@ -35,6 +35,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   @override
   void initState() {
     _carouselSliderProvider.homeCarouselSlider();
+    _categoryListProvider.getCategoryData();
 
     super.initState();
   }
