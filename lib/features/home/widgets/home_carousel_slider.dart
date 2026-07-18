@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../app/app_colors.dart';
 import '../../shared/widgets/app_network_image.dart';
-import '../../shared/widgets/app_shimmer.dart';
+import 'home_carousel_shimmer.dart';
 import '../presentation/provider/home_carousel_slider_provider.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
@@ -45,7 +45,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
         if (carouselProvider.sliderInProgress) {
           return SizedBox(
             height: 180,
-            child: AppShimmer(),
+            child: HomeCarouselShimmer(),
           );
         }
 

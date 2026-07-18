@@ -1,8 +1,10 @@
-import 'package:craftybay/features/product/presentation/screen/product_list_by_category_screen.dart';
-import 'package:craftybay/features/shared/data/model/category_model.dart';
+
 import 'package:flutter/material.dart';
 
+
 import '../../../app/app_colors.dart';
+import '../../product/presentation/screen/product_list_by_category_screen.dart';
+import '../data/model/category_model.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.categoryModel});
@@ -11,12 +13,16 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
           ProductListByCategoryScreen.name,
-          arguments: {'categoryId': categoryModel.id, 'categoryName': categoryModel.title},
+          arguments: {
+            'categoryId': categoryModel.id,
+            'categoryName': categoryModel.title,
+          },
         );
       },
       child: Column(
@@ -31,10 +37,10 @@ class CategoryCard extends StatelessWidget {
               categoryModel.icon,
               width: 48,
               height: 48,
-              errorBuilder: (_,_,_){
-                return Icon(Icons.error_outline, size: 48, color: Colors.red,);
+              errorBuilder: (_, _, _) {
+                return Icon(Icons.error_outline, size: 48, color: Colors.red);
               },
-            )
+            ),
           ),
           const SizedBox(height: 4),
           Text(

@@ -8,7 +8,6 @@ import '../../widgets/home_carousel_slider.dart';
 import '../../widgets/home_category_section.dart';
 import '../../widgets/home_section_header.dart';
 import '../../widgets/product_search_bar.dart';
-import '../provider/home_carousel_slider_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,9 +19,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final HomeCarouselSliderProvider _carouselSliderProvider =
-  //     HomeCarouselSliderProvider();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
