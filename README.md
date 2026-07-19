@@ -4,15 +4,16 @@ Crafty Bay is a dynamic and modern E-Commerce mobile application built with Flut
 
 ## 🚀 Key Features
 
-- **User Authentication**: Secure login and registration using Email & OTP (Pin Code).
-- **Home Dashboard**: Dynamic banners, categories, and product highlights (Popular, New, Special).
-- **Product Discovery**: Browse products by categories and view detailed product information.
-- **Cart Management**: Add, remove, and manage items in the shopping cart with real-time price updates.
+- **User Authentication**: Secure login and registration using Email & OTP (Pin Code) verification.
+- **Home Dashboard**: Dynamic banners, categories, and highlighted product sections (Popular, New, Special).
+- **Product Discovery**: Browse products by categories, view detailed product information, and read/write reviews.
+- **Cart Management**: Add, remove, and manage items in the shopping cart with real-time updates.
 - **Wishlist**: Save favorite products for later purchase.
-- **State Management**: Robust state handling using the `Provider` package.
-- **Localization**: Multi-language support (i18n) for a global user base.
-- **Networking**: Integrated with REST APIs for dynamic data fetching.
-- **Firebase Integration**: Includes Firebase Analytics and Crashlytics for monitoring and performance tracking.
+- **State Management**: Robust and efficient state handling using the `Provider` package.
+- **Localization**: Multi-language support (English & Bengali) using standard Flutter localization.
+- **Networking**: Custom `NetworkCaller` service built on top of the `http` package for API interactions.
+- **Loading States**: Shimmer effects for a polished user experience during data fetching.
+- **Firebase Integration**: Includes Firebase Core, Analytics, and Crashlytics for performance monitoring.
 
 ## 🛠️ Tech Stack & Dependencies
 
@@ -21,31 +22,47 @@ Crafty Bay is a dynamic and modern E-Commerce mobile application built with Flut
 - **State Management**: [Provider](https://pub.dev/packages/provider)
 - **Networking**: [http](https://pub.dev/packages/http)
 - **UI Components**: 
-  - `carousel_slider` for banners.
+  - `carousel_slider` for dynamic banners.
   - `flutter_svg` for vector graphics.
   - `pin_code_fields` for OTP inputs.
+  - `shimmer` for loading skeletons.
+- **Media & Caching**: `cache_network_media` for efficient image loading.
 - **Local Storage**: `shared_preferences`
 - **Analytics & Monitoring**: `firebase_analytics`, `firebase_crashlytics`
-- **Localization**: `intl`, `flutter_localization`
+- **Utilities**: `logger` for debugging, `email_validator` for form validation.
+- **Localization**: `intl`, `flutter_localizations` (built-in)
 
 ## 📁 Project Structure
 
-The project follows a feature-based architecture for better scalability and maintainability:
+The project follows a modular, feature-based architecture to ensure code maintainability and scalability:
 
 ```text
 lib/
-├── app/                # App-wide configurations (Theme, Colors, Routes, Constants)
-├── core/               # Core services (Network caller, Common utilities)
-├── features/           # Feature-specific modules
-│   ├── auth/           # Authentication flow
-│   ├── home/           # Home screen & banners
-│   ├── category/       # Category listing & navigation
-│   ├── product/        # Product details & reviews
-│   ├── cart/           # Cart management
-│   ├── wish_list/      # Wishlist functionality
-│   └── shared/         # Shared widgets & providers across features
-├── l10n/               # Localization files
-└── main.dart           # Entry point of the application
+├── app/                        # App-wide configurations and global logic
+│   ├── controller/             # Business logic for app-wide states (e.g., AuthController)
+│   ├── providers/              # Global ChangeNotifiers (Theme, Language)
+│   ├── app_colors.dart         # Centralized color palette
+│   ├── app_theme.dart          # Light and Dark theme definitions
+│   ├── routes.dart             # Named routes and navigation logic
+│   ├── asset_path.dart         # Constants for asset (SVG, PNG) paths
+│   └── app_constant.dart       # General app constants (API keys, base URLs)
+├── core/                       # Shared services and utilities
+│   └── service/
+│       └── network_caller/     # Custom HTTP client for API interactions
+├── features/                   # Independent modules for each app feature
+│   ├── auth/                   # Email & OTP verification, user profile
+│   ├── home/                   # Home dashboard, banners, and categories
+│   ├── product/                # Product lists, details, and reviews
+│   ├── cart/                   # Shopping cart management
+│   ├── category/               # Category-wise product filtering
+│   ├── wish_list/              # User's saved favorite products
+│   └── shared/                 # Common UI components used across features
+│       ├── data/               # Shared models (e.g., UserModel, ProductModel)
+│       └── presentation/       # Shared widgets and global UI state
+├── l10n/                       # Localization (i18n) files
+│   ├── app_en.arb              # English translation strings
+│   └── app_bn.arb              # Bengali translation strings
+└── main.dart                   # Root of the application
 ```
 
 ## ⚙️ Getting Started
