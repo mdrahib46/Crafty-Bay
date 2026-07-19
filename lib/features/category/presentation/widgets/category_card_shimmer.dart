@@ -8,8 +8,8 @@ class CategoryCardShimmer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 56,
-          width: 56,
+          height: 80,
+          width: 80,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
@@ -18,7 +18,7 @@ class CategoryCardShimmer extends StatelessWidget {
         const SizedBox(height: 8),
         Container(
           height: 10,
-          width: 50,
+          width: 80,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(4),

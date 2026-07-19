@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shared/presentation/providers/category_list_provider.dart';
+import '../providers/category_list_provider.dart';
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/widgets/category_card.dart';
 import '../../../shared/widgets/center_circular_progress_indicator.dart';
@@ -34,8 +34,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         _scrollController.position.extentBefore < 300) {
       _categoryListProvider.getCategoryData();
     }
-
-    // print('list lenth from loadMore" ${_categoryListProvider.categoryList.length}');
   }
 
   @override
@@ -58,8 +56,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
           child: Consumer<CategoryListProvider>(
 
             builder: (context, _, _) {
-              print('Total Category Item : ${_categoryListProvider.categoryList.length}');
-
               if(_categoryListProvider.isInitialLoading){
                 return CenterCircularProgressIndicator();
               }

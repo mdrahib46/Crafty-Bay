@@ -10,4 +10,6 @@ class AppUrls {
 
   static String getCategory(int pageSize, int pageNo) =>
       "$_baseUrl/categories?count=$pageSize&page=$pageNo";
+  static String getProduct(int pageSize, int pageNo) =>
+      "$_baseUrl/products?count=$pageSize&page=$pageNo";
 }

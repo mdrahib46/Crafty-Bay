@@ -53,7 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     3,
                     4,
                     5,
-                  ].map((e) => ProductCard()).toList(),
+                  ].map((e) =>
+                      SizedBox()
+                      // ProductCard()
+                    // Todo: Implement Product Card
+
+                  ).toList(),
                 ),
               ),
               const SizedBox(height: 8),
@@ -69,7 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     3,
                     4,
                     5,
-                  ].map((e) => ProductCard()).toList(),
+                  ].map((e) =>
+                    SizedBox()
+                    //ProductCard()
+                    // Todo: Implement Product Card
+                    ).toList(),
                 ),
               ),
               const SizedBox(height: 8),
@@ -85,7 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     3,
                     4,
                     5,
-                  ].map((e) => ProductCard()).toList(),
+                  ].map((e) =>
+                      SizedBox()
+                  //ProductCard()
+                    // Todo: Implement Product Card
+                ).toList(),
                 ),
               ),
             ],

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../category/presentation/widgets/category_card_shimmer.dart';
-import '../../shared/presentation/providers/category_list_provider.dart';
+import '../../category/presentation/providers/category_list_provider.dart';
 import '../../shared/widgets/app_shimmer.dart';
 import '../../shared/widgets/category_card.dart';
 
@@ -20,11 +20,11 @@ class HomeCategorySection extends StatelessWidget {
       height: 110,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: provider.isLoading
+        itemCount: provider.isInitialLoading
             ? 10
             : min(provider.categoryList.length, 10),
         itemBuilder: (context, index) {
-          if (provider.isLoading) {
+          if (provider.isInitialLoading) {
             return const AppShimmer(child: CategoryCardShimmer());
           }
 

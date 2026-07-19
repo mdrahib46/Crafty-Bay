@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../app/get_network_caller.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
-import '../../data/model/category_model.dart';
+import '../../../shared/data/model/category_model.dart';
 
 class CategoryListProvider extends ChangeNotifier {
   bool _isInitialLoading = false;
