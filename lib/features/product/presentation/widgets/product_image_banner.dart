@@ -3,35 +3,36 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 
+class ProductImageBanner extends StatefulWidget {
+  const ProductImageBanner({super.key, required this.photos});
 
-class ProductImageBanner extends StatelessWidget {
-  const ProductImageBanner({
-    super.key,
-    required List<dynamic> carouselItemList,
-    required ValueNotifier<int> currentIndex,
-  }) : _carouselItemList = carouselItemList, _currentIndex = currentIndex;
+  final List<String> photos;
 
-  final List<dynamic> _carouselItemList;
-  final ValueNotifier<int> _currentIndex;
+  @override
+  State<ProductImageBanner> createState() => _ProductImageBannerState();
+}
 
+class _ProductImageBannerState extends State<ProductImageBanner> {
+
+  final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CarouselSlider(
-          items: _carouselItemList.map((i) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Colors.grey.shade200),
-              child: Center(
-                child: Text(
-                  'Text $i',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.themeColor,
+          items: widget.photos.map((photo) {
+            return Builder(
+              builder: (context) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(60),
+                    image: DecorationImage(image: NetworkImage(photo)),
                   ),
-                ),
-              ),
+
+                );
+              }
             );
           }).toList(),
           options: CarouselOptions(
@@ -39,7 +40,7 @@ class ProductImageBanner extends StatelessWidget {
             viewportFraction: 1,
             enlargeCenterPage: true,
             onPageChanged: (index, reason) {
-              _currentIndex.value = index;
+              _selectedIndex.value = index;
             },
           ),
         ),
@@ -48,21 +49,19 @@ class ProductImageBanner extends StatelessWidget {
           right: 0,
           left: 0,
           child: ValueListenableBuilder(
-            valueListenable: _currentIndex,
+            valueListenable: _selectedIndex,
             builder: (context, index, _) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < _carouselItemList.length; i++)
+                  for (int i = 0; i < widget.photos.length; i++)
                     Container(
                       height: 12,
                       width: 12,
                       margin: EdgeInsets.only(right: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: i == index
-                            ? AppColors.themeColor
-                            : Colors.white,
+                        color: i == index ? AppColors.themeColor : Colors.white,
                       ),
                     ),
                 ],

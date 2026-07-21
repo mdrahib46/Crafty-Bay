@@ -42,6 +42,7 @@ class _IncDecButtonState extends State<IncDecButton> {
               setState(() {});
             }
           },
+          disable: _counter <= widget.minCount
         ),
         
         Text('$_counter', style: TextStyle(fontSize: 24, ),),
@@ -54,19 +55,19 @@ class _IncDecButtonState extends State<IncDecButton> {
               widget.onChange(_counter);
               setState(() {});
             }
-          },
+          }, disable: _counter  >= widget.maxCount,
         ),
       ],
     );
   }
 
-  Widget _iconButton({required IconData icon, required VoidCallback onTap}) {
+  Widget _iconButton({required IconData icon, required VoidCallback onTap, required bool disable}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: AppColors.themeColor,
+          color: disable ? Colors.grey : AppColors.themeColor,
           borderRadius: BorderRadius.circular(4),
         ),
         child: Icon(icon, color: Colors.white, size: 20,),

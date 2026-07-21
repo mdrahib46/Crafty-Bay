@@ -1,8 +1,10 @@
-import 'package:craftybay/features/product/presentation/providers/product_list_providers.dart';
-import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
-import 'package:craftybay/features/shared/widgets/product_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
+import '../../../shared/widgets/product_card.dart';
+import '../providers/product_list_providers.dart';
 
 class ProductListByCategoryScreen extends StatefulWidget {
   const ProductListByCategoryScreen({
@@ -87,5 +89,9 @@ class _ProductListByCategoryScreenState
     );
   }
 
-
+  @override
+  void dispose(){
+    _scrollController.dispose();
+    super.dispose();
+  }
 }

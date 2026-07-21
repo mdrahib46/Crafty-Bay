@@ -12,4 +12,7 @@ class AppUrls {
       "$_baseUrl/categories?count=$pageSize&page=$pageNo";
   static String getProduct(int pageSize, int pageNo) =>
       "$_baseUrl/products?count=$pageSize&page=$pageNo";
+
+
+  static String productDetailsUrl(String productId) => "$_baseUrl/products/id/$productId";
 }
