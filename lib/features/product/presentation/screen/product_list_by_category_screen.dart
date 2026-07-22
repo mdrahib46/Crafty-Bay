@@ -36,7 +36,7 @@ class _ProductListByCategoryScreenState
 
   void loadMore() {
     if (_productListProviders.isLoading == false &&
-        (_scrollController.position.extentBefore < 300)) {
+        (_scrollController.position.extentBefore < 400)) {
       _productListProviders.getProductList();
     }
   }
@@ -53,29 +53,34 @@ class _ProductListByCategoryScreenState
               return CenterCircularProgressIndicator();
             }
 
-            print(_productListProviders.productList.length);
+            debugPrint("Product Item Length ${_productListProviders.productList.length}");
             return Column(
               children: [
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: GridView.builder(
-                      controller: _scrollController,
-                      itemCount: _productListProviders.productList.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 4,
-                        childAspectRatio: 0.7,
+                  child: RefreshIndicator(
+                    onRefresh: ()async{
+                      _productListProviders.refreshProduct();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: GridView.builder(
+                        controller: _scrollController,
+                        itemCount: _productListProviders.productList.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 4,
+                          childAspectRatio: 0.7,
+                        ),
+                        itemBuilder: (context, index) {
+                          return FittedBox(
+                            child: ProductCard(
+                              productModel:
+                                  _productListProviders.productList[index],
+                            ),
+                          );
+                        },
                       ),
-                      itemBuilder: (context, index) {
-                        return FittedBox(
-                          child: ProductCard(
-                            productModel:
-                                _productListProviders.productList[index],
-                          ),
-                        );
-                      },
                     ),
                   ),
                 ),

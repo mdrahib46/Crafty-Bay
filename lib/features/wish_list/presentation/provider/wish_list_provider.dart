@@ -1,10 +1,12 @@
 
+import 'package:craftybay/features/product/data/models/product_model.dart';
+// import 'package:craftybay/features/wish_list/data/model/wish_list_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app/controller/auth_controller.dart';
 import '../../../../app/get_network_caller.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
-import '../../data/model/wish_list_model.dart';
 
 class WishListProvider extends ChangeNotifier {
   bool _isInitialLoading = false;
@@ -16,8 +18,8 @@ class WishListProvider extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  final List<WishListModel> _wishList = [];
-  List<WishListModel> get wishList => _wishList;
+  final List<ProductModel> _wishList = [];
+  List<ProductModel> get wishList => _wishList;
 
   int _currentPage = 0;
   int? _lastPage;
@@ -39,19 +41,27 @@ class WishListProvider extends ChangeNotifier {
     }
     notifyListeners();
 
+    debugPrint('Token: ${AuthController.accessToken}');
+
     final NetworkResponse response = await getNetworkCaller().getRequest(
       AppUrls.getWishList(_itemPerPage, _currentPage),
     );
 
     if (response.isSuccess) {
-      List<WishListModel> list = [];
+      List<ProductModel> list = [];
       for (Map<String, dynamic> jsonData
-          in response.responseBody['data']['result']) {
-        list.add(WishListModel.formJson(jsonData));
+          in response.responseBody['data']['results']) {
+        list.add(ProductModel.formJson(jsonData['product']));
       }
       _wishList.addAll(list);
 
       _lastPage = response.responseBody['data']['last_page'];
+
+
+      isSuccess = true;
+      _errorMessage = null;
+    }else{
+      _errorMessage = response.errorMessage;
     }
 
     if (_currentPage == 1) {

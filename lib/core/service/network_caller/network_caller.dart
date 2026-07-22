@@ -19,7 +19,7 @@ class NetworkCaller {
 
       _logRequest(url, headers: headers());
 
-      final Response response = await get(uri);
+      final Response response = await get(uri, headers: headers());
 
       _logResponse(response);
 

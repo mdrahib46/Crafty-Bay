@@ -14,26 +14,22 @@
 // "first_page": null,
 // "last_page": null
 
-class WishListModel {
-  final String id;
-  final String title;
-  List<String> photos;
-  final int price;
-  final double rating;
+import '../../../product/data/models/product_model.dart';
 
+class WishListModel extends ProductModel {
   WishListModel({
-    required this.id,
-    required this.title,
-    required this.photos,
-    required this.price,
-    required this.rating,
+    required super.id,
+    required super.title,
+    required super.photos,
+    required super.price,
+    required super.rating,
   });
 
   factory WishListModel.formJson(Map<String, dynamic> jsonData) {
     return WishListModel(
       id: jsonData['_id'],
-      title: jsonData['title'],
-      photos: List.from(jsonData['photos']),
+      title: jsonData['title'] ?? '',
+      photos: List<String>.from(jsonData['photos']),
       price: jsonData['current_price'],
       rating: 4.5,
     );
