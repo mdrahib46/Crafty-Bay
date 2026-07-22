@@ -18,9 +18,6 @@ class AddToCartProvider extends ChangeNotifier {
 
     _addToCartInProgress = true;
     notifyListeners();
-
-    // final Map<String, dynamic> requestBody = {"product": productId};
-
     final NetworkResponse response = await getNetworkCaller().postRequest(
       AppUrls.addToCartUrl,
       body: addToCardParams.toJson(),
