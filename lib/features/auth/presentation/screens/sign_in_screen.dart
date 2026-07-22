@@ -1,5 +1,4 @@
 
-import 'package:craftybay/features/auth/data/model/sign_in_arguments.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +15,8 @@ import '../widgets/app_logo.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key,});
+  const SignInScreen({super.key});
   static const String name = '/sign-in';
-
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -32,16 +30,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final SignInProvider _signInProvider = SignInProvider();
 
-
-
   @override
   Widget build(BuildContext context) {
-
-
-    final SignInArguments args =
-        ModalRoute.of(context)?.settings.arguments as SignInArguments? ??
-            const SignInArguments();
-
     final localization = context.localization;
 
     return ChangeNotifierProvider.value(
@@ -51,22 +41,6 @@ class _SignInScreenState extends State<SignInScreen> {
           child: SingleChildScrollView(
             child: Stack(
               children: [
-               if(args.allowSkip)
-                 Positioned(
-                   top: 10,
-                   right: 10,
-                   child: TextButton(
-                     onPressed: onTapSkipSignIn,
-                     child: Text(
-                       'Skip',
-                       style: TextStyle(
-                         fontSize: 18,
-                         fontWeight: FontWeight.w500,
-                       ),
-                     ),
-                   ),
-                 ),
-
                 Center(
                   child: Form(
                     key: _formKey,
@@ -161,9 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void onTapSkipSignIn(){
-    Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (route)=> false);
-  }
+
 
   void _onTapSingIn() {
     if (_formKey.currentState!.validate()) {
@@ -179,22 +151,20 @@ class _SignInScreenState extends State<SignInScreen> {
 
     final bool isSuccess = await _signInProvider.signIn(signInParams);
 
+    if (!mounted) return;
+
     if (isSuccess) {
-      if (mounted) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          MainBottomNavScreen.name,
-          (route) => false,
-        );
-      }
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainBottomNavScreen.name,
+        (route) => false,
+      );
     } else {
-      if (mounted) {
-        showSnackBarMessage(
-          context,
-          _signInProvider.errorMessage!,
-          isError: true,
-        );
-      }
+      showSnackBarMessage(
+        context,
+        _signInProvider.errorMessage!,
+        isError: true,
+      );
     }
   }
 

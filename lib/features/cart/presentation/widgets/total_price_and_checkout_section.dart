@@ -17,7 +17,6 @@ class TotalPriceAndCheckoutSection extends StatefulWidget {
 
 class _TotalPriceAndCheckoutSectionState extends State<TotalPriceAndCheckoutSection> {
 
-  // final AddToCartProvider _addToCartProvider = AddToCartProvider();
 
 
   @override
