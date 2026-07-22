@@ -1,15 +1,21 @@
-import 'package:craftybay/features/product/presentation/providers/product_details_provider.dart';
-import 'package:craftybay/features/product/presentation/screen/product_review_screen.dart';
-import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
+import 'package:craftybay/app/controller/auth_controller.dart';
+import 'package:craftybay/features/auth/data/model/sign_in_arguments.dart';
+import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:craftybay/features/cart/presentation/data/model/add_to_cart_params.dart';
+import 'package:craftybay/features/cart/presentation/provider/add_to_cart_provider.dart';
+import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../../../shared/widgets/inc_dec_button.dart';
+import '../providers/product_details_provider.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/price_and_cart_section.dart';
 import '../widgets/product_image_banner.dart';
 import '../widgets/size_picker.dart';
+import 'product_review_screen.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.productId});
@@ -22,13 +28,14 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  // final List _carouselItemList = [1, 2, 3, 4, 5, 6];
-  // final ValueNotifier<int> _currentIndex = ValueNotifier(0);
-  // final List<String> _itemColor = ['Red', 'Blue', 'Black', 'Yellow', 'White'];
-  // final List<String> _itemSize = ['S', 'M', 'L', 'XL', '2L'];
-
   final ProductDetailsProvider _productDetailsProvider =
       ProductDetailsProvider();
+
+  final AddToCartProvider _addToCartProvider = AddToCartProvider();
+
+  String? _selectedColor;
+  String? _selectedSize;
+  int _quantity = 1;
 
   @override
   void initState() {
@@ -88,7 +95,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     child: IncDecButton(
                                       maxCount: productModel.quantity,
                                       minCount: 1,
-                                      initialValue: 1,
+                                      initialValue: _quantity,
                                       onChange: (int value) {},
                                     ),
                                   ),
@@ -153,6 +160,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       colors: productModel.colors,
                                       onChange: (String selectedColor) {
                                         print(selectedColor);
+                                        _selectedColor = selectedColor;
                                       },
                                     ),
                                     const SizedBox(height: 16),
@@ -170,6 +178,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       itemSize: productModel.size,
                                       onChange: (String selectedSize) {
                                         print(selectedSize);
+                                        _selectedSize = selectedSize;
                                       },
                                     ),
                                     const SizedBox(height: 16),
@@ -196,13 +205,52 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                   ),
                 ),
-                PriceAndAddToCartSection(),
+                ChangeNotifierProvider.value(
+                  value: _addToCartProvider,
+                  child: PriceAndAddToCartSection(
+                    onTapAddToCart: _onTapAddToCart,
+                  ),
+                ),
               ],
             );
           },
         ),
       ),
     );
+  }
+
+  void _onTapAddToCart() async {
+
+    final isLoggedIn = await AuthController.isUserLoggedIn();
+    print('User logged in...!');
+
+    if(!isLoggedIn){
+      if(mounted){
+        Navigator.pushNamed(context, SignInScreen.name, arguments: SignInArguments(allowSkip: false, returnAfterLogin: true));
+      }
+      return;
+    }
+
+    AddToCartParams params = AddToCartParams(
+      productID: widget.productId,
+      quantity: _quantity,
+      color: _selectedColor,
+      size: _selectedSize,
+    );
+
+    final isSuccess = await _addToCartProvider.addToCart(
+      addToCardParams: params,
+    );
+
+    if (isSuccess) {
+      if (mounted) {
+        showSnackBarMessage(context, 'Added to cart...!');
+      }
+    } else {
+      if (mounted) {
+        showSnackBarMessage(context, _addToCartProvider.errorMessage!);
+      }
+    }
   }
 
   Widget _buildSectionHeader(String title) {

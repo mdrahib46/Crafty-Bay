@@ -1,4 +1,5 @@
 
+import 'package:craftybay/features/auth/data/model/sign_in_arguments.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +16,9 @@ import '../widgets/app_logo.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  const SignInScreen({super.key,});
   static const String name = '/sign-in';
+
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -30,8 +32,16 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final SignInProvider _signInProvider = SignInProvider();
 
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    final SignInArguments args =
+        ModalRoute.of(context)?.settings.arguments as SignInArguments? ??
+            const SignInArguments();
+
     final localization = context.localization;
 
     return ChangeNotifierProvider.value(
@@ -39,97 +49,120 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Center(
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 80),
-                      AppLogo(),
-                      Text(
-                        localization.welcomeBack,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        localization.signInWithEmailPassword,
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      const SizedBox(height: 20),
+            child: Stack(
+              children: [
+               if(args.allowSkip)
+                 Positioned(
+                   top: 10,
+                   right: 10,
+                   child: TextButton(
+                     onPressed: onTapSkipSignIn,
+                     child: Text(
+                       'Skip',
+                       style: TextStyle(
+                         fontSize: 18,
+                         fontWeight: FontWeight.w500,
+                       ),
+                     ),
+                   ),
+                 ),
 
-                      TextFormField(
-                        controller: _emailTEController,
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          hintText: context.localization.email,
-                        ),
-                        validator: (String? input) =>
-                            Validators.validateEmail(input),
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _passTEController,
-                        obscureText: true,
-                        obscuringCharacter: '*',
-                        decoration: InputDecoration(
-                          hintText: context.localization.password,
-                        ),
-                        validator: (String? input) =>
-                            Validators.validatePassword(input),
-                      ),
-                      const SizedBox(height: 20),
+                Center(
+                  child: Form(
+                    key: _formKey,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 80),
+                          AppLogo(),
+                          Text(
+                            localization.welcomeBack,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            localization.signInWithEmailPassword,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          const SizedBox(height: 20),
 
-                      Consumer<SignInProvider>(
-                        builder: (context, _, child) {
-                          if (_signInProvider.signInInProgress) {
-                            return CenterCircularProgressIndicator();
-                          } else {
-                            return FilledButton(
-                              onPressed: _onTapSingIn,
-                              child: Text(localization.signIn),
-                            );
-                          }
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      RichText(
-                        text: TextSpan(
-                          text: localization.dontHaveAnAccount,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
-                          children: [
-                            TextSpan(
-                              text: localization.signUp,
-                              style: Theme.of(context).textTheme.bodyMedium!
-                                  .copyWith(
-                                    color: AppColors.themeColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = _navigateToSignUpScreen,
+                          TextFormField(
+                            controller: _emailTEController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              hintText: context.localization.email,
                             ),
-                          ],
-                        ),
+                            validator: (String? input) =>
+                                Validators.validateEmail(input),
+                          ),
+                          const SizedBox(height: 8),
+                          TextFormField(
+                            controller: _passTEController,
+                            obscureText: true,
+                            obscuringCharacter: '*',
+                            decoration: InputDecoration(
+                              hintText: context.localization.password,
+                            ),
+                            validator: (String? input) =>
+                                Validators.validatePassword(input),
+                          ),
+                          const SizedBox(height: 20),
+
+                          Consumer<SignInProvider>(
+                            builder: (context, _, child) {
+                              if (_signInProvider.signInInProgress) {
+                                return CenterCircularProgressIndicator();
+                              } else {
+                                return FilledButton(
+                                  onPressed: _onTapSingIn,
+                                  child: Text(localization.signIn),
+                                );
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          RichText(
+                            text: TextSpan(
+                              text: localization.dontHaveAnAccount,
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .copyWith(color: Colors.grey),
+                              children: [
+                                TextSpan(
+                                  text: localization.signUp,
+                                  style: Theme.of(context).textTheme.bodyMedium!
+                                      .copyWith(
+                                        color: AppColors.themeColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = _navigateToSignUpScreen,
+                                ),
+                              ],
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(localization.forgotPassword),
+                          ),
+                        ],
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(localization.forgotPassword),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void onTapSkipSignIn(){
+    Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (route)=> false);
   }
 
   void _onTapSingIn() {
@@ -156,7 +189,11 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     } else {
       if (mounted) {
-        showSnackBarMessage(context, _signInProvider.errorMessage!, isError: true);
+        showSnackBarMessage(
+          context,
+          _signInProvider.errorMessage!,
+          isError: true,
+        );
       }
     }
   }

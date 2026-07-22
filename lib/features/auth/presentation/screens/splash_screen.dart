@@ -1,4 +1,5 @@
 
+import 'package:craftybay/features/auth/data/model/sign_in_arguments.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/controller/auth_controller.dart';
@@ -43,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           context,
           SignInScreen.name,
           (route) => false,
+          arguments: SignInArguments(allowSkip: true, returnAfterLogin:  false)
         );
       }
     }

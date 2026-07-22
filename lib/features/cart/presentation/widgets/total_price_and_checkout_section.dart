@@ -1,13 +1,24 @@
 
+
 import 'package:flutter/material.dart';
+
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/app_constant.dart';
 
-class TotalPriceAndCheckoutSection extends StatelessWidget {
+class TotalPriceAndCheckoutSection extends StatefulWidget {
   const TotalPriceAndCheckoutSection({
     super.key,
   });
+
+  @override
+  State<TotalPriceAndCheckoutSection> createState() => _TotalPriceAndCheckoutSectionState();
+}
+
+class _TotalPriceAndCheckoutSectionState extends State<TotalPriceAndCheckoutSection> {
+
+  // final AddToCartProvider _addToCartProvider = AddToCartProvider();
+
 
   @override
   Widget build(BuildContext context) {
