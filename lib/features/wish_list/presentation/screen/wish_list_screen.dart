@@ -1,12 +1,13 @@
-import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
-import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
-import 'package:craftybay/features/wish_list/presentation/provider/remove_wish_list_item_provider.dart';
-import 'package:craftybay/features/wish_list/presentation/provider/wish_list_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../../../shared/widgets/product_card.dart';
+import '../../../shared/widgets/show_snackbar_message.dart';
+import '../provider/remove_wish_list_item_provider.dart';
+import '../provider/wish_list_provider.dart';
 
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
