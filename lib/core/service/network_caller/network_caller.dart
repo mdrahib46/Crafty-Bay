@@ -90,6 +90,66 @@ class NetworkCaller {
     }
   }
 
+  Future<NetworkResponse> deleteRequest(
+      String url, {
+        Map<String, dynamic>? body,
+      }) async {
+    try {
+      Uri uri = Uri.parse(url);
+
+      _logRequest(
+        url,
+        requestBody: body,
+        headers: headers(),
+      );
+
+      final Response response = await delete(
+        uri,
+        headers: headers(),
+        body: body != null ? jsonEncode(body) : null,
+      );
+
+      _logResponse(response);
+
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 204) {
+        dynamic decodedResponse;
+
+        if (response.body.isNotEmpty) {
+          decodedResponse = jsonDecode(response.body);
+        }
+
+        return NetworkResponse(
+          isSuccess: true,
+          statusCode: response.statusCode,
+          responseBody: decodedResponse,
+        );
+      } else {
+        dynamic decodedResponse;
+
+        if (response.body.isNotEmpty) {
+          decodedResponse = jsonDecode(response.body);
+        }
+
+        return NetworkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMessage:
+          decodedResponse?['msg'] ??
+              decodedResponse?['message'] ??
+              'Something went wrong....!',
+        );
+      }
+    } on Exception catch (e) {
+      return NetworkResponse(
+        isSuccess: false,
+        statusCode: -1,
+        errorMessage: e.toString(),
+      );
+    }
+  }
+
   void _logRequest(
     String url, {
     Map<String, dynamic>? requestBody,

@@ -14,24 +14,18 @@
 // "first_page": null,
 // "last_page": null
 
-import '../../../product/data/models/product_model.dart';
+import 'package:craftybay/features/product/data/models/product_model.dart';
 
-class WishListModel extends ProductModel {
-  WishListModel({
-    required super.id,
-    required super.title,
-    required super.photos,
-    required super.price,
-    required super.rating,
-  });
+class WishListModel {
+  final String wishListId;
+  final ProductModel productModel;
+
+  WishListModel({required this.wishListId, required this.productModel});
 
   factory WishListModel.formJson(Map<String, dynamic> jsonData) {
     return WishListModel(
-      id: jsonData['_id'],
-      title: jsonData['title'] ?? '',
-      photos: List<String>.from(jsonData['photos']),
-      price: jsonData['current_price'],
-      rating: 4.5,
+      wishListId: jsonData['_id'],
+      productModel: ProductModel.formJson(jsonData['product']),
     );
   }
 }
