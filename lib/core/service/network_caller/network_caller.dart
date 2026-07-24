@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
@@ -9,8 +10,10 @@ class NetworkCaller {
   final Logger _logger = Logger();
   final Map<String, String> Function() headers;
 
+  final VoidCallback onUnAuthorized;
+
   /// Constructor
-  NetworkCaller({required this.headers});
+  NetworkCaller({required this.headers, required this.onUnAuthorized});
 
   /// Get Request
   Future<NetworkResponse> getRequest(String url) async {
@@ -30,6 +33,13 @@ class NetworkCaller {
           isSuccess: true,
           statusCode: response.statusCode,
           responseBody: decodedResponse,
+        );
+      } else if (response.statusCode == 401) {
+        onUnAuthorized();
+        return NetworkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMessage: 'Unauthorize',
         );
       } else {
         final decodedResponse = jsonDecode(response.body);
@@ -72,6 +82,13 @@ class NetworkCaller {
           statusCode: response.statusCode,
           responseBody: encodedResponse,
         );
+      } else if (response.statusCode == 401) {
+        onUnAuthorized();
+        return NetworkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMessage: 'Unauthorize',
+        );
       } else {
         final encodedResponse = jsonDecode(response.body);
 
@@ -91,17 +108,13 @@ class NetworkCaller {
   }
 
   Future<NetworkResponse> deleteRequest(
-      String url, {
-        Map<String, dynamic>? body,
-      }) async {
+    String url, {
+    Map<String, dynamic>? body,
+  }) async {
     try {
       Uri uri = Uri.parse(url);
 
-      _logRequest(
-        url,
-        requestBody: body,
-        headers: headers(),
-      );
+      _logRequest(url, requestBody: body, headers: headers());
 
       final Response response = await delete(
         uri,
@@ -125,6 +138,13 @@ class NetworkCaller {
           statusCode: response.statusCode,
           responseBody: decodedResponse,
         );
+      } else if (response.statusCode == 401) {
+        onUnAuthorized();
+        return NetworkResponse(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          errorMessage: 'Unauthorize',
+        );
       } else {
         dynamic decodedResponse;
 
@@ -136,7 +156,7 @@ class NetworkCaller {
           isSuccess: false,
           statusCode: response.statusCode,
           errorMessage:
-          decodedResponse?['msg'] ??
+              decodedResponse?['msg'] ??
               decodedResponse?['message'] ??
               'Something went wrong....!',
         );
