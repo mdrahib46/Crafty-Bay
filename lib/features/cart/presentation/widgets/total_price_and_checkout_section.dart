@@ -1,6 +1,8 @@
 
 
+import 'package:craftybay/features/cart/presentation/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 import '../../../../app/app_colors.dart';
@@ -21,6 +23,7 @@ class _TotalPriceAndCheckoutSectionState extends State<TotalPriceAndCheckoutSect
 
   @override
   Widget build(BuildContext context) {
+    final totalPrice = context.read<CartListProvider>().getTotalPrice();
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -39,7 +42,7 @@ class _TotalPriceAndCheckoutSectionState extends State<TotalPriceAndCheckoutSect
             children: [
               Text('Total Price '),
               Text(
-                '${AppConstant.takaSign}100.00',
+                '${AppConstant.takaSign}$totalPrice',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 18,

@@ -35,4 +35,25 @@ class AddToCartProvider extends ChangeNotifier {
 
     return isSuccess;
   }
+
+
+  // int getTotalPrice(){
+  //   int total = 0;
+  //   for(CartItemModel item in _cartItemList){
+  //     total += item.productModel.price * item.quantity;
+  //   }
+  //
+  //   return total;
+  // }
+  //
+  // void updateCartItemQuantity(String cartItemId, int quantity){
+  //   for(CartItemModel item in _cartItemList){
+  //     if(item.id == cartItemId){
+  //       item.quantity = quantity;
+  //       break;
+  //     }
+  //   }
+  //
+  //   notifyListeners();
+  // }
 }

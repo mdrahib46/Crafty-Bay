@@ -1,4 +1,7 @@
+import 'package:craftybay/features/cart/presentation/data/model/cart_item_model.dart';
+import 'package:craftybay/features/cart/presentation/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/app_constant.dart';
@@ -6,9 +9,9 @@ import '../../../../app/asset_path.dart';
 import '../../../shared/widgets/inc_dec_button.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({
-    super.key,
-  });
+  const CartItem({super.key, required this.cartItemModel});
+
+  final CartItemModel cartItemModel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,22 @@ class CartItem extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Row(
         children: [
-          Image.asset(AssetPath.dummyImage, width: 100),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Image.network(
+              getProductPhoto(cartItemModel.productModel.photos),
+              fit: BoxFit.cover,
+              errorBuilder: (context, _, _) {
+                return Image.asset(
+                  width: 100,
+                  AssetPath.noImage,
+                  fit: BoxFit.cover,
+                );
+              },
+              width: 100,
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -25,8 +43,7 @@ class CartItem extends StatelessWidget {
                 spacing: 8,
                 children: [
                   Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Column(
@@ -34,23 +51,34 @@ class CartItem extends StatelessWidget {
 
                           children: [
                             Text(
-                              'Title of the product',
+                              cartItemModel.productModel.title,
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
-                              'Color: Red Size: XL',
-                              style: TextStyle(
-                                color: Colors.black54,
-                              ),
+                            Row(
+                              children: [
+                                if (cartItemModel.color != null)
+                                  Text(
+                                    'Color: ${cartItemModel.color}',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                const SizedBox(width: 4),
+                                if (cartItemModel.color != null)
+                                  Text(
+                                    'Size: ${cartItemModel.size}',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                              ],
                             ),
                           ],
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          /// TODO: Delete Cart Item using API
+                        },
                         icon: Icon(Icons.delete_outline),
                       ),
                     ],
@@ -59,7 +87,7 @@ class CartItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${AppConstant.takaSign} 100',
+                        '${AppConstant.takaSign} ${cartItemModel.productModel.price}',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
@@ -69,10 +97,17 @@ class CartItem extends StatelessWidget {
                       SizedBox(
                         width: 100,
                         child: IncDecButton(
-                          maxCount: 20,
+                          maxCount: cartItemModel.productModel.quantity,
                           minCount: 1,
-                          initialValue: 1,
-                          onChange: (int value) {},
+                          initialValue: cartItemModel.quantity,
+                          onChange: (int value) {
+                            context
+                                .read<CartListProvider>()
+                                .updateCartItemQuantity(
+                                  cartItemModel.id,
+                                  value,
+                                );
+                          },
                         ),
                       ),
                     ],
@@ -84,5 +119,12 @@ class CartItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getProductPhoto(List<String> photo) {
+    if (photo.isEmpty) {
+      return '';
+    }
+    return photo.first;
   }
 }

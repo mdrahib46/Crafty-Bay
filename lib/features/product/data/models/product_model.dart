@@ -8,13 +8,14 @@
 // "current_price": 258,
 //
 
-import 'dart:convert';
+
 
 class ProductModel {
   final String id;
   final String title;
   final List<String> photos;
   final int price;
+  final int quantity;
   final double rating;
 
   ProductModel({
@@ -22,6 +23,7 @@ class ProductModel {
     required this.title,
     required this.photos,
     required this.price,
+    required this.quantity,
     required this.rating,
   });
 
@@ -31,6 +33,7 @@ class ProductModel {
       title: jsonData['title'],
       photos: List.from(jsonData['photos']),
       price: jsonData['current_price'],
+      quantity: jsonData['quantity'],
       rating: 4.5,
     );
   }
