@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,18 +10,20 @@ import '../../../shared/widgets/center_circular_progress_indicator.dart';
 
 class PriceAndAddToCartSection extends StatefulWidget {
   const PriceAndAddToCartSection({
-    super.key, required this.onTapAddToCart,
+    super.key,
+    required this.onTapAddToCart,
+    required this.price,
   });
 
   final VoidCallback onTapAddToCart;
+  final num price;
 
   @override
-  State<PriceAndAddToCartSection> createState() => _PriceAndAddToCartSectionState();
+  State<PriceAndAddToCartSection> createState() =>
+      _PriceAndAddToCartSectionState();
 }
 
 class _PriceAndAddToCartSectionState extends State<PriceAndAddToCartSection> {
-
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +44,7 @@ class _PriceAndAddToCartSectionState extends State<PriceAndAddToCartSection> {
             children: [
               Text('Price '),
               Text(
-                '${AppConstant.takaSign}100',
+                '${AppConstant.takaSign}${widget.price}',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 18,

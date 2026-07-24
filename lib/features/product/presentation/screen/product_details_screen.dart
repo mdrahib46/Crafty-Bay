@@ -96,7 +96,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       maxCount: productModel.quantity,
                                       minCount: 1,
                                       initialValue: _quantity,
-                                      onChange: (int value) {},
+                                      onChange: (int value) {
+                                        _quantity = value;
+                                        setState(() {});
+                                      },
                                     ),
                                   ),
                                 ],
@@ -209,6 +212,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   value: _addToCartProvider,
                   child: PriceAndAddToCartSection(
                     onTapAddToCart: _onTapAddToCart,
+                    price: productModel.currentPrice * _quantity,
                   ),
                 ),
               ],
