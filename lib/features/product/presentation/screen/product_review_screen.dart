@@ -70,7 +70,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                 ),
                 if (_productsReviewProvider.isLoadingMore)
                   LinearProgressIndicator(),
-                ReviewCountAndCreateSection(),
+                ReviewCountAndCreateSection(productId: widget.productId,),
               ],
             );
           },

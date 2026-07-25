@@ -66,7 +66,8 @@ class AppRoutes {
         break;
 
       case CreateReviewScreen.name:
-        widget = CreateReviewScreen();
+        String args = settings.arguments as String;
+        widget = CreateReviewScreen(productId: args,);
         break;
     }
     return MaterialPageRoute(builder: (ctx) => widget);

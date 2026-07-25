@@ -19,25 +19,6 @@ class HomeCarouselSlider extends StatefulWidget {
 class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
   final ValueNotifier<int> _currentIndex = ValueNotifier(0);
 
-  // final Set<String> _checkedUrls = {};
-  //
-  // Future<void> _checkImageCache(String url) async {
-  //
-  //   if (_checkedUrls.contains(url)) return;
-  //   _checkedUrls.add(url);
-  //
-  //   final file = await DefaultCacheManager().getFileFromCache(url);
-  //
-  //   if (file != null) {
-  //     debugPrint('✅ CACHE HIT');
-  //     debugPrint('URL: $url');
-  //     debugPrint('PATH: ${file.file.path}');
-  //   } else {
-  //     debugPrint('🌐 CACHE MISS');
-  //     debugPrint('URL: $url');
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeCarouselSliderProvider>(

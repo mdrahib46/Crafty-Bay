@@ -1,20 +1,23 @@
-import 'package:craftybay/app/controller/auth_controller.dart';
-import 'package:craftybay/app/crafty_bay_app.dart';
-import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/controller/auth_controller.dart';
+import '../../../../app/crafty_bay_app.dart';
+import '../../../auth/presentation/screens/sign_in_screen.dart';
 import '../providers/products_review_provider.dart';
 import '../screen/create_review_screen.dart';
 
 class ReviewCountAndCreateSection extends StatelessWidget {
-  const ReviewCountAndCreateSection({super.key});
+  const ReviewCountAndCreateSection({super.key, required this.productId});
+
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
     final totalReview = context
-        .read<ProductsReviewProvider>()
+        .watch<ProductsReviewProvider>()
         .reviewList
         .length;
     return Container(
@@ -51,7 +54,7 @@ class ReviewCountAndCreateSection extends StatelessWidget {
             ],
           ),
           FloatingActionButton(
-            onPressed: _moveToCreateReviewScreen,
+            onPressed: ()=> _moveToCreateReviewScreen(context),
             child: Icon(Icons.add),
           ),
         ],
@@ -59,17 +62,25 @@ class ReviewCountAndCreateSection extends StatelessWidget {
     );
   }
 
-  void _moveToCreateReviewScreen() async{
-    if (await AuthController.isUserLoggedIn() == false) {
+  void _moveToCreateReviewScreen(BuildContext context) async {
+    if (!await AuthController.isUserLoggedIn()) {
       Navigator.pushNamed(
         CraftyBayApp.navigatorKey.currentContext!,
         SignInScreen.name,
       );
+      return;
     }
 
-    Navigator.pushNamed(
-      CraftyBayApp.navigatorKey.currentContext!,
+    final result = await Navigator.pushNamed(
+      context,
       CreateReviewScreen.name,
+      arguments: productId,
     );
+
+    if (!context.mounted) return;
+
+    if (result == true) {
+      context.read<ProductsReviewProvider>().refreshReview(productId);
+    }
   }
 }

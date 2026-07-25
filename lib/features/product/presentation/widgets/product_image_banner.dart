@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:craftybay/features/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
@@ -13,28 +14,12 @@ class ProductImageBanner extends StatefulWidget {
 }
 
 class _ProductImageBannerState extends State<ProductImageBanner> {
-
   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CarouselSlider(
-          items: widget.photos.map((photo) {
-            return Builder(
-              builder: (context) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 1),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withAlpha(60),
-                    image: DecorationImage(image: NetworkImage(photo)),
-                  ),
-
-                );
-              }
-            );
-          }).toList(),
           options: CarouselOptions(
             height: 220,
             viewportFraction: 1,
@@ -43,6 +28,12 @@ class _ProductImageBannerState extends State<ProductImageBanner> {
               _selectedIndex.value = index;
             },
           ),
+          items: widget.photos.map((photo) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: AppNetworkImage(url: photo, fit: BoxFit.contain),
+            );
+          }).toList(),
         ),
         Positioned(
           bottom: 10,
