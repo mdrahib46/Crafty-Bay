@@ -10,7 +10,6 @@ class CreateReviewScreen extends StatefulWidget {
 }
 
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
-  final TextEditingController _firstNameTEController = TextEditingController();
   final TextEditingController _lastNameTEController = TextEditingController();
   final TextEditingController _reviewTEController = TextEditingController();
 
@@ -27,28 +26,15 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
           child: Column(
             children: [
               TextFormField(
-                controller: _firstNameTEController,
-                decoration: InputDecoration(
-                  hintText: 'First Name',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty == true) {
-                    return 'Enter your first name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
                 controller: _lastNameTEController,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  hintText: 'Last Name',
+                  hintText: 'Product Rating',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty == true) {
-                    return 'Enter your last name';
+                    return 'Enter product rating';
                   }
                   return null;
                 },
