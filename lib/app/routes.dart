@@ -61,7 +61,8 @@ class AppRoutes {
         break;
 
       case ProductReviewScreen.name:
-        widget = ProductReviewScreen();
+        String args  = settings.arguments as String;
+        widget = ProductReviewScreen(productId: args,);
         break;
 
       case CreateReviewScreen.name:

@@ -23,6 +23,9 @@ class AppUrls {
 
   static String deleteWishListItem(String productId) => "$_baseUrl/wishlist/$productId";
 
+  static String getReviewList(int pageSize, int pageNo, String productId) =>
+      "$_baseUrl/reviews?count=$pageSize&page=$pageNo&product=$productId";
+
 
 
 

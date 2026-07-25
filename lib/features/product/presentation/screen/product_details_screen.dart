@@ -128,6 +128,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       Navigator.pushNamed(
                                         context,
                                         ProductReviewScreen.name,
+                                        arguments: productModel.id
                                       );
                                     },
                                     child: const Text(

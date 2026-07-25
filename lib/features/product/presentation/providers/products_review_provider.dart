@@ -1,10 +1,11 @@
-import 'package:craftybay/app/get_network_caller.dart';
-import 'package:craftybay/app/urls.dart';
-import 'package:craftybay/core/service/network_caller/network_caller.dart';
-import 'package:craftybay/features/product/data/models/product_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class ProductListProviders extends ChangeNotifier {
+import '../../../../app/get_network_caller.dart';
+import '../../../../app/urls.dart';
+import '../../../../core/service/network_caller/network_caller.dart';
+import '../../data/models/product_review_model.dart';
+
+class ProductsReviewProvider extends ChangeNotifier {
   bool _isInitialLoading = false;
 
   bool get isInitialLoading => _isInitialLoading;
@@ -17,15 +18,15 @@ class ProductListProviders extends ChangeNotifier {
 
   String? get errorMessage => _errorMessage;
 
-  final List<ProductModel> _productList = [];
-  List<ProductModel> get productList => _productList;
+  final List<ProductReviewModel> _reviewList = [];
 
-  int? _lastPage;
+  List<ProductReviewModel> get reviewList => _reviewList;
+
   int _currentPage = 0;
-  final int _productPerPage = 20;
+  int? _lastPage;
+  final int _itemPerPage = 10;
 
-  //
-  Future<bool> getProductList() async {
+  Future<bool> getReviewListData(String itemId) async {
     bool isSuccess = false;
 
     if (_currentPage == 0 || (_lastPage != null && _currentPage < _lastPage!)) {
@@ -39,24 +40,26 @@ class ProductListProviders extends ChangeNotifier {
     } else {
       _isLoadingMore = true;
     }
+
     notifyListeners();
 
-    NetworkResponse response = await getNetworkCaller().getRequest(
-      AppUrls.getProduct(_productPerPage, _currentPage),
+    final NetworkResponse response = await getNetworkCaller().getRequest(
+      AppUrls.getReviewList(_itemPerPage, _currentPage, itemId),
     );
 
     if (response.isSuccess) {
-      List<ProductModel> list = [];
+      List<ProductReviewModel> list = [];
 
       for (Map<String, dynamic> jsonData
           in response.responseBody['data']['results']) {
-        list.add(ProductModel.formJson(jsonData));
+        list.add(ProductReviewModel.fromJson(jsonData));
       }
 
-      _productList.addAll(list);
+      _reviewList.addAll(list);
       _lastPage = response.responseBody['data']['last_page'];
 
       _errorMessage = null;
+      isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
     }
@@ -71,13 +74,14 @@ class ProductListProviders extends ChangeNotifier {
     return isSuccess;
   }
 
-  void refreshProduct() {
+  void refreshReview(String itemId) async {
     _currentPage = 0;
     _lastPage = null;
-    _productList.clear();
-    getProductList();
+    _errorMessage = null;
+    _reviewList.clear();
+    await getReviewListData(itemId);
+    notifyListeners();
   }
-
 
   bool get isLoading => _isInitialLoading || isLoadingMore;
 }
