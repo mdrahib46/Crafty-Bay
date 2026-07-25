@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../providers/products_review_provider.dart';
 import '../widgets/product_review_widget.dart';
 import '../widgets/review_count_and_create_section.dart';
@@ -44,8 +45,13 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
         appBar: AppBar(title: Text('Review Screen')),
         body: Consumer<ProductsReviewProvider>(
           builder: (context, _, _) {
+            if (_productsReviewProvider.errorMessage != null) {
+              return Center(child: Text(_productsReviewProvider.errorMessage!));
+            }
 
-
+            if (_productsReviewProvider.isInitialLoading) {
+              return CenterCircularProgressIndicator();
+            }
             return Column(
               children: [
                 Expanded(
@@ -72,8 +78,6 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
       ),
     );
   }
-
-
 
   @override
   void dispose() {

@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../providers/products_review_provider.dart';
 import '../screen/create_review_screen.dart';
 
 class ReviewCountAndCreateSection extends StatelessWidget {
@@ -9,6 +10,7 @@ class ReviewCountAndCreateSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final totalReview = context.read<ProductsReviewProvider>().reviewList.length;
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -34,7 +36,7 @@ class ReviewCountAndCreateSection extends StatelessWidget {
                 ),
               ),
               Text(
-                '(1000)',
+                '($totalReview})',
                 style: TextStyle(
                   color: Colors.grey.shade600,
                   fontWeight: FontWeight.w500,
