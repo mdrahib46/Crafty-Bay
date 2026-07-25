@@ -1,3 +1,6 @@
+import 'package:craftybay/app/controller/auth_controller.dart';
+import 'package:craftybay/app/crafty_bay_app.dart';
+import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +13,10 @@ class ReviewCountAndCreateSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final totalReview = context.read<ProductsReviewProvider>().reviewList.length;
+    final totalReview = context
+        .read<ProductsReviewProvider>()
+        .reviewList
+        .length;
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -45,13 +51,25 @@ class ReviewCountAndCreateSection extends StatelessWidget {
             ],
           ),
           FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, CreateReviewScreen.name);
-            },
-            child: Icon(Icons.add, ),
+            onPressed: _moveToCreateReviewScreen,
+            child: Icon(Icons.add),
           ),
         ],
       ),
+    );
+  }
+
+  void _moveToCreateReviewScreen() async{
+    if (await AuthController.isUserLoggedIn() == false) {
+      Navigator.pushNamed(
+        CraftyBayApp.navigatorKey.currentContext!,
+        SignInScreen.name,
+      );
+    }
+
+    Navigator.pushNamed(
+      CraftyBayApp.navigatorKey.currentContext!,
+      CreateReviewScreen.name,
     );
   }
 }
