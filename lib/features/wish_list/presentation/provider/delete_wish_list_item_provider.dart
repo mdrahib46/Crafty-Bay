@@ -1,9 +1,11 @@
-import 'package:craftybay/app/get_network_caller.dart';
-import 'package:craftybay/app/urls.dart';
-import 'package:craftybay/core/service/network_caller/network_caller.dart';
-import 'package:flutter/cupertino.dart';
 
-class RemoveWishListItemProvider extends ChangeNotifier {
+import 'package:flutter/material.dart';
+
+import '../../../../app/get_network_caller.dart';
+import '../../../../app/urls.dart';
+import '../../../../core/service/network_caller/network_caller.dart';
+
+class DeleteWishListItemProvider extends ChangeNotifier {
   bool _itemInProgress = false;
   bool get itemInProgress => _itemInProgress;
 

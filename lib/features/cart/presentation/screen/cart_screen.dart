@@ -1,9 +1,12 @@
-import 'package:craftybay/features/cart/presentation/provider/cart_provider.dart';
-import 'package:craftybay/features/shared/widgets/center_circular_progress_indicator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
+import '../../../shared/widgets/show_snackbar_message.dart';
+import '../provider/cart_provider.dart';
+import '../provider/delete_cart_item_provider.dart';
 import '../widgets/cart_item.dart';
 import '../widgets/total_price_and_checkout_section.dart';
 
@@ -18,6 +21,8 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final CartListProvider _cartListProvider = CartListProvider();
+  final DeleteCartItemProvider _deleteCartItemProvider =
+      DeleteCartItemProvider();
 
   @override
   void initState() {
@@ -27,26 +32,29 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _cartListProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: _cartListProvider),
+        ChangeNotifierProvider.value(value: _deleteCartItemProvider),
+      ],
       child: PopScope(
         onPopInvokedWithResult: (_, __) => _backToHome,
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Cart'),
+            title: const Text('Cart'),
             leading: IconButton(
               onPressed: _backToHome,
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
             ),
           ),
           body: Consumer<CartListProvider>(
             builder: (context, _, _) {
               if (_cartListProvider.isLoading) {
-                return CenterCircularProgressIndicator();
+                return const CenterCircularProgressIndicator();
               }
 
               if (_cartListProvider.cartItemList.isEmpty) {
-                return Center(child: Text('No cart item available....!'));
+                return const Center(child: Text('No cart item available....!'));
               }
 
               if (_cartListProvider.errorMessage != null) {
@@ -59,13 +67,26 @@ class _CartScreenState extends State<CartScreen> {
                     child: ListView.builder(
                       itemCount: _cartListProvider.cartItemList.length,
                       itemBuilder: (context, index) {
-                        return CartItem(
-                          cartItemModel: _cartListProvider.cartItemList[index],
+                        final item = _cartListProvider.cartItemList[index];
+
+                        return Consumer<DeleteCartItemProvider>(
+                          builder: (context, _, _) {
+                            return CartItem(
+                              cartItemModel:
+                                  _cartListProvider.cartItemList[index],
+                              onTapDelete: () => deleteCartItem(
+                                _cartListProvider.cartItemList[index].id,
+                              ),
+                              isDeleting:
+                                  _deleteCartItemProvider.deletingItemId ==
+                                  item.id,
+                            );
+                          },
                         );
                       },
                     ),
                   ),
-                  TotalPriceAndCheckoutSection(),
+                  const TotalPriceAndCheckoutSection(),
                 ],
               );
             },
@@ -73,6 +94,24 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> deleteCartItem(String itemId) async {
+    final bool isSuccess = await _deleteCartItemProvider.deleteCartItem(itemId);
+
+    if (!mounted) return;
+
+    if (isSuccess) {
+      _cartListProvider.removeCartItem(itemId);
+
+      showSnackBarMessage(context, _deleteCartItemProvider.successMessage!);
+    } else {
+      showSnackBarMessage(
+        context,
+        _deleteCartItemProvider.errorMessage!,
+        isError: true,
+      );
+    }
   }
 
   void _backToHome() {

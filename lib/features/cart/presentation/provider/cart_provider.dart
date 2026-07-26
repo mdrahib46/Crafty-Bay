@@ -45,24 +45,28 @@ class CartListProvider extends ChangeNotifier {
     return isSuccess;
   }
 
-
-  int getTotalPrice(){
+  int getTotalPrice() {
     int total = 0;
-    for(CartItemModel item in _cartItemList){
+    for (CartItemModel item in _cartItemList) {
       total += item.productModel.price * item.quantity;
     }
 
     return total;
   }
 
-  void updateCartItemQuantity(String cartItemId, int quantity){
-    for(CartItemModel item in _cartItemList){
-      if(item.id == cartItemId){
+  void updateCartItemQuantity(String cartItemId, int quantity) {
+    for (CartItemModel item in _cartItemList) {
+      if (item.id == cartItemId) {
         item.quantity = quantity;
         break;
       }
     }
 
+    notifyListeners();
+  }
+
+  void removeCartItem(String itemId) {
+    _cartItemList.removeWhere((item) => item.id == itemId);
     notifyListeners();
   }
 }

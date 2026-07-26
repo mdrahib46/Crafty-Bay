@@ -1,20 +1,34 @@
-import 'package:craftybay/features/cart/presentation/data/model/cart_item_model.dart';
-import 'package:craftybay/features/cart/presentation/provider/cart_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/app_constant.dart';
 import '../../../../app/asset_path.dart';
+import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../../../shared/widgets/inc_dec_button.dart';
+import '../data/model/cart_item_model.dart';
+import '../provider/cart_provider.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key, required this.cartItemModel});
+  const CartItem({
+    super.key,
+    required this.cartItemModel,
+    required this.onTapDelete,
+    required this.isDeleting,
+  });
 
   final CartItemModel cartItemModel;
+  final VoidCallback onTapDelete;
+  final bool isDeleting;
 
   @override
   Widget build(BuildContext context) {
+    if (isDeleting) {
+      return SizedBox(
+          height: 100,
+          child: CenterCircularProgressIndicator());
+    }
     return Card(
       color: Colors.white,
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -76,9 +90,7 @@ class CartItem extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {
-                          /// TODO: Delete Cart Item using API
-                        },
+                        onPressed: onTapDelete,
                         icon: Icon(Icons.delete_outline),
                       ),
                     ],
