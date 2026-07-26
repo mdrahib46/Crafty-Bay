@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/home/presentation/provider/home_carousel_slider_provider.dart';
 import '../features/shared/presentation/providers/main_nav_holder_provider.dart';
+import '../features/wish_list/presentation/provider/add_wish_list_item_provider.dart';
 import '../l10n/app_localizations.dart';
 import 'app_theme.dart';
 import 'providers/language_toggle_provider.dart';
@@ -42,6 +43,9 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
         ChangeNotifierProvider.value(value: _languageToggleProvider),
         ChangeNotifierProvider(create: (_)=> MainNavHolderProvider()),
         ChangeNotifierProvider(create: (_)=> HomeCarouselSliderProvider()),
+        ChangeNotifierProvider(
+          create: (_) => AddToWishlistItemProvider(),
+        ),
       ],
       child: Consumer<LanguageToggleProvider>(
         builder: (context, languageProvider, child) {

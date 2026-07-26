@@ -14,23 +14,20 @@ class AppUrls {
 
   static String getProduct(int pageSize, int pageNo) =>
       "$_baseUrl/products?count=$pageSize&page=$pageNo";
-
-  static String getWishList(int pageSize, int pageNo) =>
-      "$_baseUrl/wishlist?count=$pageSize&page=$pageNo";
-
   static String productDetailsUrl(String productId) =>
       "$_baseUrl/products/id/$productId";
 
   static const String addToCartUrl = "$_baseUrl/cart";
-
   static const String cartListUrl = "$_baseUrl/cart";
   static String deleteCartItemUrl(String itemId) => "$_baseUrl/cart/$itemId";
 
+  static String getWishList(int pageSize, int pageNo) =>
+      "$_baseUrl/wishlist?count=$pageSize&page=$pageNo";
   static String deleteWishListItem(String productId) =>
       "$_baseUrl/wishlist/$productId";
+  static const String addWishListUrl = "$_baseUrl/wishlist";
 
   static String getReviewList(int pageSize, int pageNo, String productId) =>
       "$_baseUrl/reviews?count=$pageSize&page=$pageNo&product=$productId";
-
   static const String createReview = "$_baseUrl/review";
 }

@@ -75,15 +75,18 @@ class ProductCard extends StatelessWidget {
                             Text('${productModel.rating}'),
                           ],
                         ),
-                        Container(
-                          padding: .all(2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: AppColors.themeColor,
-                          ),
-                          child: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
+                        GestureDetector(
+                          onTap: (){},
+                          child: Container(
+                            padding: .all(2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: AppColors.themeColor,
+                            ),
+                            child: Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],

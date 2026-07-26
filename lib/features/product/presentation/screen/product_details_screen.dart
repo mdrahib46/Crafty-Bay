@@ -4,6 +4,7 @@ import 'package:craftybay/features/auth/presentation/screens/sign_in_screen.dart
 import 'package:craftybay/features/cart/presentation/data/model/add_to_cart_params.dart';
 import 'package:craftybay/features/cart/presentation/provider/add_to_cart_provider.dart';
 import 'package:craftybay/features/shared/widgets/show_snackbar_message.dart';
+import 'package:craftybay/features/wish_list/presentation/provider/add_wish_list_item_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -128,7 +129,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       Navigator.pushNamed(
                                         context,
                                         ProductReviewScreen.name,
-                                        arguments: productModel.id
+                                        arguments: productModel.id,
                                       );
                                     },
                                     child: const Text(
@@ -139,16 +140,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      color: AppColors.themeColor,
-                                    ),
-                                    child: const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.white,
-                                      size: 18,
+                                  GestureDetector(
+                                    onTap: _onTapAddToWishList,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color: AppColors.themeColor,
+                                      ),
+                                      child: const Icon(
+                                        Icons.favorite_border,
+                                        color: Colors.white,
+                                        size: 18,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -224,14 +228,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  void _onTapAddToCart() async {
+  void _onTapAddToWishList() async {
+    final provider = context.read<AddToWishlistItemProvider>();
 
+    final bool isSuccess = await provider.addWishListItem(
+      itemId: widget.productId,
+    );
+    if (!mounted) return;
+    if (isSuccess) {
+      showSnackBarMessage(context, provider.successMsg!);
+    } else {
+      showSnackBarMessage(context, provider.errorMessage!);
+    }
+  }
+
+  void _onTapAddToCart() async {
     final isLoggedIn = await AuthController.isUserLoggedIn();
     print('User logged in...!');
 
-    if(!isLoggedIn){
-      if(mounted){
-        Navigator.pushNamed(context, SignInScreen.name, arguments: SignInArguments(allowSkip: false, returnAfterLogin: true));
+    if (!isLoggedIn) {
+      if (mounted) {
+        Navigator.pushNamed(
+          context,
+          SignInScreen.name,
+          arguments: SignInArguments(allowSkip: false, returnAfterLogin: true),
+        );
       }
       return;
     }

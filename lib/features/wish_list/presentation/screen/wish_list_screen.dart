@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,7 +5,7 @@ import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../../../shared/widgets/product_card.dart';
 import '../../../shared/widgets/show_snackbar_message.dart';
-import '../provider/remove_wish_list_item_provider.dart';
+import '../provider/delete_wish_list_item_provider.dart';
 import '../provider/wish_list_provider.dart';
 
 class WishListScreen extends StatefulWidget {
@@ -21,8 +20,8 @@ class WishListScreen extends StatefulWidget {
 class _WishListScreenState extends State<WishListScreen> {
   final WishListProvider _wishListProvider = WishListProvider();
   final ScrollController _scrollController = ScrollController();
-  final RemoveWishListItemProvider _removeWishListItemProvider =
-      RemoveWishListItemProvider();
+  final DeleteWishListItemProvider _removeWishListItemProvider =
+      DeleteWishListItemProvider();
 
   @override
   void initState() {
@@ -70,6 +69,12 @@ class _WishListScreenState extends State<WishListScreen> {
                     );
                   }
 
+                  if (_wishListProvider.wishList.isEmpty) {
+                    return const Center(
+                      child: Text('No item available in your wishlist...!'),
+                    );
+                  }
+
                   return Column(
                     children: [
                       Expanded(
@@ -90,12 +95,12 @@ class _WishListScreenState extends State<WishListScreen> {
                                     childAspectRatio: 0.7,
                                   ),
                               itemBuilder: (context, index) {
-                                return Consumer<RemoveWishListItemProvider>(
+                                return Consumer<DeleteWishListItemProvider>(
                                   builder: (context, _, _) {
-                                    if (_removeWishListItemProvider
-                                        .itemInProgress) {
-                                      return CenterCircularProgressIndicator();
-                                    }
+                                    // if (_removeWishListItemProvider
+                                    //     .itemInProgress) {
+                                    //   return CenterCircularProgressIndicator();
+                                    // }
                                     return FittedBox(
                                       child: Stack(
                                         children: [
@@ -135,7 +140,8 @@ class _WishListScreenState extends State<WishListScreen> {
                           ),
                         ),
                       ),
-                      if (_wishListProvider.isLoadingMore)
+                      if (_wishListProvider.isLoadingMore ||
+                          (_removeWishListItemProvider.itemInProgress))
                         LinearProgressIndicator(),
                     ],
                   );
@@ -147,7 +153,6 @@ class _WishListScreenState extends State<WishListScreen> {
       ),
     );
   }
-
 
   /// Delete Wishlist Item
   void _onTapRemoveItem(String itemId) async {
