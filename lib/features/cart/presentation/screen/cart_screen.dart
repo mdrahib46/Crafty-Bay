@@ -54,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
               }
 
               if (_cartListProvider.cartItemList.isEmpty) {
-                return const Center(child: Text('No cart item available....!'));
+                return const Center(child: Text('No item available in your cart ...!'));
               }
 
               if (_cartListProvider.errorMessage != null) {

@@ -24,6 +24,7 @@ class AppUrls {
   static const String addToCartUrl = "$_baseUrl/cart";
 
   static const String cartListUrl = "$_baseUrl/cart";
+  static String deleteCartItemUrl(String itemId) => "$_baseUrl/cart/$itemId";
 
   static String deleteWishListItem(String productId) =>
       "$_baseUrl/wishlist/$productId";

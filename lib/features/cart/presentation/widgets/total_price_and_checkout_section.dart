@@ -1,12 +1,10 @@
-
-
-import 'package:craftybay/features/cart/presentation/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/app_constant.dart';
+import '../provider/cart_provider.dart';
 
 class TotalPriceAndCheckoutSection extends StatefulWidget {
   const TotalPriceAndCheckoutSection({
