@@ -19,7 +19,7 @@ Crafty Bay is a sophisticated E-Commerce mobile application built with Flutter, 
 
 #
 
-## ✨ What's New & Engineered
+## 💡 Technical Highlights
 
 Recent updates focus on **scalability**, **developer efficiency**, and **community engagement**:
 
@@ -137,9 +137,10 @@ lib/
 
 ---
 
-## 🤝 Contribution
+## 🙏 Acknowledgements
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the platform.
+Special thanks to [Rafat Meraz](https://www.linkedin.com/in/rafatjamadermaraz/) for his outstanding mentorship and guidance throughout this Flutter learning journey. I also sincerely appreciate **Ostad** and the entire **Ostad team** for providing an excellent learning platform and continuous support that made this project possible.
+
 
 ---
 *Crafty Bay - Shop with style.*
