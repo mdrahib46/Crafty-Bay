@@ -30,7 +30,6 @@ class SignInProvider extends ChangeNotifier {
       );
       String accessToken = response.responseBody!['data']['token'];
 
-
       await AuthController.saveUserData(accessToken, userModel);
 
       isSuccess = true;

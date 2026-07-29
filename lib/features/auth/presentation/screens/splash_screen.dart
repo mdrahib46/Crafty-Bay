@@ -1,4 +1,4 @@
-import 'package:craftybay/features/shared/presentation/main_bottom_nav_screen.dart';
+import 'package:craftybay/features/shared/presentation/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/controller/auth_controller.dart';

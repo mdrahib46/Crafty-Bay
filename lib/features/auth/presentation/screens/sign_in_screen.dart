@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/extensions/localization_extension.dart';
-import '../../../shared/presentation/main_bottom_nav_screen.dart';
+import '../../../shared/presentation/screens/main_bottom_nav_screen.dart';
 import '../../../shared/utils/validators.dart';
 import '../../../shared/widgets/center_circular_progress_indicator.dart';
 import '../../../shared/widgets/show_snackbar_message.dart';

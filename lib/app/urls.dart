@@ -30,4 +30,5 @@ class AppUrls {
   static String getReviewList(int pageSize, int pageNo, String productId) =>
       "$_baseUrl/reviews?count=$pageSize&page=$pageNo&product=$productId";
   static const String createReview = "$_baseUrl/review";
+  static const String readProfile = "$_baseUrl/auth/profile";
 }

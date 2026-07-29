@@ -1,5 +1,6 @@
 import 'package:craftybay/features/product/presentation/screen/create_review_screen.dart';
 import 'package:craftybay/features/product/presentation/screen/product_review_screen.dart';
+import 'package:craftybay/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/otp_verify_screen.dart';
@@ -10,7 +11,7 @@ import '../features/cart/presentation/screen/cart_screen.dart';
 import '../features/category/presentation/screen/category_screen.dart';
 import '../features/product/presentation/screen/product_details_screen.dart';
 import '../features/product/presentation/screen/product_list_by_category_screen.dart';
-import '../features/shared/presentation/main_bottom_nav_screen.dart';
+import '../features/shared/presentation/screens/main_bottom_nav_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/wish_list/presentation/screen/wish_list_screen.dart';
 
@@ -69,6 +70,10 @@ class AppRoutes {
         String args = settings.arguments as String;
         widget = CreateReviewScreen(productId: args,);
         break;
+
+      case ProfileScreen.name:
+        // final userModel = settings.arguments as UserModel;
+        widget = ProfileScreen();
     }
     return MaterialPageRoute(builder: (ctx) => widget);
   }
